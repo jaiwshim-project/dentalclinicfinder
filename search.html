@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>병원검색 - DentalClinicFinder</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -824,14 +825,45 @@
             }
         }
 
-        const hospitals = [
-            {name: '서로명명치과병원', doctor: '이준섭', location: '서울 강남구', score: 97, type: '종합병원', specialty: '임플란트'},
-            {name: '속초선치과', doctor: '양동봉', location: '강원 속초시', score: 94, type: '치과의원', specialty: '일반진료'},
-            {name: '서울 24시 치과센터', doctor: '김성민', location: '서울 강남구', score: 93, type: '종합병원', specialty: '응급치료'},
-            {name: '우리치과병원', doctor: '박지현', location: '서울 마포구', score: 92, type: '치과병원', specialty: '교정치료'},
-            {name: '행복치과병원', doctor: '최수진', location: '인천 남동구', score: 91, type: '종합병원', specialty: '심미치료'},
-            {name: '화이트서울치과', doctor: '임영일', location: '대전 중구', score: 90, type: '치과의원', specialty: '심미치료'}
-        ];
+        // Supabase 설정
+        const SUPABASE_URL = 'https://haxcktfnuudlqciyljtp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhheGNrdGZudXVkbHFjaXlsanRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzMDUwNDAsImV4cCI6MjA4NDg4MTA0MH0.suN7BeaHx3MjaNlMDQa0940P-rMl2XPyk4ksoQEU3YM';
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let hospitals = [];
+
+        // 페이지 로드 시 병원 데이터 불러오기
+        async function loadHospitals() {
+            const tbody = document.getElementById('searchResultsBody');
+            tbody.innerHTML = '<tr><td colspan="4" style="padding: 60px; text-align: center; color: var(--text-gray);">데이터를 불러오는 중...</td></tr>';
+
+            try {
+                const { data, error } = await supabaseClient
+                    .from('hospitals')
+                    .select('*')
+                    .order('id', { ascending: true });
+
+                if (error) throw error;
+
+                hospitals = data.map(h => ({
+                    name: h.name,
+                    doctor: h.representative,
+                    location: h.address || h.region,
+                    region: h.region,
+                    score: 90 + Math.floor(Math.random() * 10),
+                    type: h.is_24h ? '24시병원' : '치과의원',
+                    specialty: h.specialty ? h.specialty.split(',')[0].trim() : '일반진료'
+                }));
+
+                displaySearchResults(hospitals);
+            } catch (err) {
+                console.error('Error loading hospitals:', err);
+                tbody.innerHTML = '<tr><td colspan="4" style="padding: 60px; text-align: center; color: #EF4444;">데이터 로드 실패: ' + err.message + '</td></tr>';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', loadHospitals);
 
         function performSearch() {
             const searchQuery = document.getElementById('mainSearchInput').value.toLowerCase();
@@ -846,8 +878,8 @@
                     h.location.toLowerCase().includes(searchQuery);
 
                 const matchesType = !filterType || h.type === filterType;
-                const matchesSpecialty = !filterSpecialty || h.specialty === filterSpecialty;
-                const matchesRegion = !filterRegion || h.location.includes(filterRegion);
+                const matchesSpecialty = !filterSpecialty || h.specialty.includes(filterSpecialty);
+                const matchesRegion = !filterRegion || h.region === filterRegion;
 
                 return matchesSearch && matchesType && matchesSpecialty && matchesRegion;
             });
@@ -889,7 +921,7 @@
             document.getElementById('filterSpecialty').value = '';
             document.getElementById('filterRegion').value = '';
             document.getElementById('filterFeature').value = '';
-            displaySearchResults(hospitals.sort((a, b) => b.score - a.score));
+            displaySearchResults(hospitals);
         }
     </script>
 </body>
