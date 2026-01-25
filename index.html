@@ -723,14 +723,15 @@
         // Supabase 설정
         const SUPABASE_URL = 'https://haxcktfnuudlqciyljtp.supabase.co';
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhheGNrdGZudXVkbHFjaXlsanRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzMDUwNDAsImV4cCI6MjA4NDg4MTA0MH0.suN7BeaHx3MjaNlMDQa0940P-rMl2XPyk4ksoQEU3YM';
-        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
         // 병원 데이터 로드
         async function loadHospitals() {
             const tbody = document.getElementById('hospitalTableBody');
 
             try {
-                const { data: hospitals, error } = await supabase
+                const { data: hospitals, error } = await supabaseClient
                     .from('hospitals')
                     .select('*')
                     .order('id', { ascending: true })
