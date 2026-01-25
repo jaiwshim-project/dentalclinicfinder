@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DentalClinicFinder - AI 기반 치과병원 신뢰&소통 평가 플랫폼</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * {
             margin: 0;
@@ -633,168 +634,12 @@
                                     <th style="padding: 14px 6px; text-align: center; font-weight: 700; font-size: 12px; width: 60px;">평가</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                <tr style="border-bottom: 1px solid #F1F3F5;">
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">1</td>
-                                    <td style="padding: 18px 8px;">
-                                        <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;">서로명<br>명치과<br>병원</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center;">
-                                        <div style="line-height: 1.4;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600;" onclick="showDoctorProfile('이준섭')">이<br>준<br>섭</span></div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">임플란트</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">단지내<br>임플란트</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">서울<br>강남<br>구</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">97</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">892</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">845</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">812</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">
-                                        <div style="font-weight: 700; color: #3B82F6; font-size: 16px;">30</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
+                            <tbody id="hospitalTableBody">
+                                <!-- 데이터는 Supabase에서 동적으로 로드됩니다 -->
+                                <tr>
+                                    <td colspan="14" style="padding: 40px; text-align: center; color: var(--text-gray);">데이터를 불러오는 중...</td>
                                 </tr>
 
-                                <!-- 2위: 속초선치과 (양동봉) -->
-                                <tr style="border-bottom: 1px solid #F1F3F5; background: #F0FDF4;">
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">2</td>
-                                    <td style="padding: 18px 8px;">
-                                        <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;">속초선<br>치과</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center;">
-                                        <div style="line-height: 1.4;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600;" onclick="showDoctorProfile('양동봉')">양<br>동<br>봉</span></div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">일반진료</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">종합치료</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">강원<br>속초<br>시</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">94</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">662</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">655</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">619</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">
-                                        <a href="https://aitalker.co.kr/book008" target="_blank" style="text-decoration: none; display: inline-block; transition: all 0.3s;" onmouseover="this.style.transform='scale(1.2)'" onmouseout="this.style.transform='scale(1)'">
-                                            <img src="ai-assistant.png" alt="AI톡" style="width: 28px; height: 28px; cursor: pointer; display: block; margin: 0 auto 4px;">
-                                        </a>
-                                        <div style="font-weight: 700; color: #3B82F6; font-size: 14px;">500</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">
-                                        <div style="font-weight: 700; color: #EC4899; font-size: 16px;">50</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
-                                </tr>
-
-                                <!-- 3위: 서울 24시 치과센터 (김성민) -->
-                                <tr style="border-bottom: 1px solid #F1F3F5;">
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">3</td>
-                                    <td style="padding: 18px 8px;">
-                                        <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;">서울 24시<br>치과센터</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center;">
-                                        <div style="line-height: 1.4;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600;" onclick="showDoctorProfile('김성민')">김<br>성<br>민</span></div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">응급치료</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">24시 응급</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">서울<br>강남<br>구</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">93</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">854</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">793</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">756</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">
-                                        <div style="font-weight: 700; color: #EC4899; font-size: 16px;">50</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
-                                </tr>
-
-                                <!-- 4위: 우리치과병원 (박지현) -->
-                                <tr style="border-bottom: 1px solid #F1F3F5;">
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">4</td>
-                                    <td style="padding: 18px 8px;">
-                                        <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;">우리치과<br>병원</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center;">
-                                        <div style="line-height: 1.4;"><span class="doctor-link" style="color: #EC4899; font-weight: 600;" onclick="showDoctorProfile('박지현')">박<br>지<br>현</span></div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">교정치료</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">투명교정</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">서울<br>마포<br>구</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">92</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">853</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">745</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">776</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">
-                                        <div style="font-weight: 700; color: #EC4899; font-size: 16px;">50</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
-                                </tr>
-
-                                <!-- 5위: 행복치과병원 (최수진) -->
-                                <tr style="border-bottom: 1px solid #F1F3F5;">
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">5</td>
-                                    <td style="padding: 18px 8px;">
-                                        <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;">행복치과<br>병원</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center;">
-                                        <div style="line-height: 1.4;"><span class="doctor-link" style="color: #EC4899; font-weight: 600;" onclick="showDoctorProfile('최수진')">최<br>수<br>진</span></div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">심미치료</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">라미네이트</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">인천<br>남동<br>구</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">91</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">808</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">801</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">758</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">
-                                        <div style="font-weight: 700; color: #3B82F6; font-size: 16px;">30</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
-                                </tr>
-
-                                <!-- 6위: 화이트서울치과 (임영일) -->
-                                <tr style="border-bottom: 1px solid #F1F3F5;">
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">6</td>
-                                    <td style="padding: 18px 8px;">
-                                        <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;" onclick="window.open('http://whiteseoulclinic.com/', '_blank')">화이트<br>서울치과</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center;">
-                                        <div style="line-height: 1.4;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600;" onclick="showDoctorProfile('임영일')">임<br>영<br>일</span></div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">심미치료</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">미소디자인</td>
-                                    <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
-                                        <div style="line-height: 1.4;">대전<br>중<br>구</div>
-                                    </td>
-                                    <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">90</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">782</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">768</td>
-                                    <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">741</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">
-                                        <div style="font-weight: 700; color: #3B82F6; font-size: 16px;">60</div>
-                                    </td>
-                                    <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">-</td>
-                                    <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
-                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -875,6 +720,68 @@
     </div>
 
     <script>
+        // Supabase 설정
+        const SUPABASE_URL = 'https://haxcktfnuudlqciyljtp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhheGNrdGZudXVkbHFjaXlsanRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzMDUwNDAsImV4cCI6MjA4NDg4MTA0MH0.suN7BeaHx3MjaNlMDQa0940P-rMl2XPyk4ksoQEU3YM';
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // 병원 데이터 로드
+        async function loadHospitals() {
+            const tbody = document.getElementById('hospitalTableBody');
+
+            try {
+                const { data: hospitals, error } = await supabase
+                    .from('hospitals')
+                    .select('*')
+                    .order('id', { ascending: true })
+                    .limit(10);
+
+                if (error) throw error;
+
+                if (hospitals && hospitals.length > 0) {
+                    tbody.innerHTML = hospitals.map((hospital, index) => {
+                        const specialty = hospital.specialty ? hospital.specialty.split(',')[0].trim() : '-';
+                        const specializedTreatment = hospital.specialty ? (hospital.specialty.split(',')[1] || '').trim() : '-';
+
+                        return `
+                            <tr style="border-bottom: 1px solid #F1F3F5; ${index % 2 === 1 ? 'background: #F0FDF4;' : ''}">
+                                <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 15px;">${index + 1}</td>
+                                <td style="padding: 18px 8px;">
+                                    <div style="color: #06D6A0; font-weight: 700; cursor: pointer; line-height: 1.4;">${hospital.name.replace(/(.{4})/g, '$1<br>')}</div>
+                                </td>
+                                <td style="padding: 18px 8px; text-align: center;">
+                                    <div style="line-height: 1.4;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600;" onclick="showDoctorProfile('${hospital.representative}')">${hospital.representative ? hospital.representative.split('').join('<br>') : '-'}</span></div>
+                                </td>
+                                <td style="padding: 18px 8px; text-align: center; font-size: 14px;">${specialty}</td>
+                                <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
+                                    <div style="line-height: 1.4;">${specializedTreatment || '-'}</div>
+                                </td>
+                                <td style="padding: 18px 8px; text-align: center; font-size: 14px;">
+                                    <div style="line-height: 1.4;">${hospital.region || '-'}</div>
+                                </td>
+                                <td style="padding: 18px 8px; text-align: center; font-weight: 700; font-size: 18px; color: #06D6A0;">-</td>
+                                <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">-</td>
+                                <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">-</td>
+                                <td style="padding: 18px 6px; text-align: center; font-size: 14px; font-weight: 600;">-</td>
+                                <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-left: 2px solid #06D6A0; border-right: 1px solid #E9ECEF;">-</td>
+                                <td style="padding: 12px 6px; text-align: center; background: #F0F9FF; border-right: 1px solid #E9ECEF;">-</td>
+                                <td style="padding: 12px 6px; text-align: center; background: #FEF2F7; border-right: 2px solid #06D6A0;">-</td>
+                                <td style="padding: 12px 6px; text-align: center; color: #F59E0B; font-size: 14px;">&#11088;&#11088;&#11088;</td>
+                            </tr>
+                        `;
+                    }).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="14" style="padding: 40px; text-align: center; color: var(--text-gray);">등록된 병원이 없습니다.</td></tr>';
+                }
+            } catch (err) {
+                console.error('Error loading hospitals:', err);
+                tbody.innerHTML = '<tr><td colspan="14" style="padding: 40px; text-align: center; color: #EF4444;">데이터 로드 실패: ' + err.message + '</td></tr>';
+            }
+        }
+
+        // 페이지 로드 시 병원 데이터 불러오기
+        document.addEventListener('DOMContentLoaded', loadHospitals);
+
         // Doctor Profile Data
         const doctorProfiles = {
             '이준섭': {
