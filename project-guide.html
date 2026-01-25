@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentalClinicFinder 프로젝트 가이드</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+            line-height: 1.8;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px;
+            background: #fff;
+        }
+        h1 {
+            text-align: center;
+            color: #06D6A0;
+            font-size: 32px;
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #06D6A0;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        h2 {
+            color: #06D6A0;
+            font-size: 22px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #E9ECEF;
+        }
+        h3 {
+            color: #333;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 14px;
+        }
+        th, td {
+            border: 1px solid #E9ECEF;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #F8F9FA;
+            font-weight: 600;
+        }
+        tr:nth-child(even) {
+            background: #FAFAFA;
+        }
+        pre {
+            background: #1E1E1E;
+            color: #D4D4D4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 13px;
+            margin: 15px 0;
+        }
+        code {
+            background: #F1F3F5;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 13px;
+            color: #E91E63;
+        }
+        .info-box {
+            background: #E8F8F3;
+            border-left: 4px solid #06D6A0;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .warning-box {
+            background: #FFF3E0;
+            border-left: 4px solid #FF9800;
+            padding: 15px 20px;
+            margin: 20px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .page-break {
+            page-break-before: always;
+        }
+        .toc {
+            background: #F8F9FA;
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+        }
+        .toc h3 {
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .toc li {
+            margin: 10px 0;
+        }
+        .toc a {
+            color: #333;
+            text-decoration: none;
+        }
+        .toc a:hover {
+            color: #06D6A0;
+        }
+        .print-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #06D6A0;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(6, 214, 160, 0.3);
+        }
+        .print-btn:hover {
+            background: #05C090;
+        }
+        @media print {
+            .print-btn {
+                display: none;
+            }
+            body {
+                padding: 20px;
+            }
+            pre {
+                white-space: pre-wrap;
+                word-wrap: break-word;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="print-btn" onclick="window.print()">PDF로 저장</button>
+
+    <h1>DentalClinicFinder</h1>
+    <p class="subtitle">프로젝트 설치 및 세팅 가이드 | 2025년 1월</p>
+
+    <div class="toc">
+        <h3>목차</h3>
+        <ul>
+            <li>1. 설치 (Installation)</li>
+            <li>2. 프로젝트 세팅 (Setup)</li>
+            <li>3. 데이터베이스 (Database)</li>
+            <li>4. 프론트엔드 (Frontend)</li>
+            <li>5. 배포 (Deployment)</li>
+            <li>6. 프로젝트 구조</li>
+            <li>7. 주요 링크</li>
+            <li>8. 다음 단계</li>
+        </ul>
+    </div>
+
+    <h2>1. 설치 (Installation)</h2>
+
+    <h3>CLI 도구 설치</h3>
+    <pre># Gemini CLI 설치
+npm install -g @google/gemini-cli
+
+# Supabase CLI 설치 (Scoop 사용)
+powershell -Command "Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression"
+scoop bucket add supabase https://github.com/supabase/scoop-bucket.git
+scoop install supabase</pre>
+
+    <h3>Git 설정</h3>
+    <pre>git config --global user.name "jaiwshim"
+git config --global user.email "jaiwshim@gmail.com"</pre>
+
+    <div class="info-box">
+        <strong>설치된 버전:</strong><br>
+        - Gemini CLI: v0.25.2<br>
+        - Supabase CLI: v2.72.7
+    </div>
+
+    <h2 class="page-break">2. 프로젝트 세팅 (Setup)</h2>
+
+    <h3>GitHub 저장소 클론</h3>
+    <pre>cd "C:\01 Claude-Code\01 dentalclinicfinder"
+git clone https://github.com/jaiwshim-project/dentalclinicfinder.git .</pre>
+
+    <h3>Supabase 프로젝트 연결</h3>
+    <pre>supabase login
+supabase init
+supabase link --project-ref haxcktfnuudlqciyljtp</pre>
+
+    <h3>Supabase 프로젝트 정보</h3>
+    <table>
+        <tr>
+            <th>항목</th>
+            <th>값</th>
+        </tr>
+        <tr>
+            <td>Project URL</td>
+            <td><code>https://haxcktfnuudlqciyljtp.supabase.co</code></td>
+        </tr>
+        <tr>
+            <td>Project Ref</td>
+            <td><code>haxcktfnuudlqciyljtp</code></td>
+        </tr>
+        <tr>
+            <td>Anon Key</td>
+            <td><code>eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...</code></td>
+        </tr>
+    </table>
+
+    <h2 class="page-break">3. 데이터베이스 (Database)</h2>
+
+    <h3>hospitals 테이블 구조</h3>
+    <table>
+        <tr>
+            <th>필드명</th>
+            <th>타입</th>
+            <th>설명</th>
+        </tr>
+        <tr><td>id</td><td>SERIAL</td><td>자동 생성</td></tr>
+        <tr><td>name</td><td>VARCHAR(200)</td><td>병원명</td></tr>
+        <tr><td>representative</td><td>VARCHAR(100)</td><td>대표원장</td></tr>
+        <tr><td>address</td><td>TEXT</td><td>주소</td></tr>
+        <tr><td>phone</td><td>VARCHAR(20)</td><td>전화번호</td></tr>
+        <tr><td>email</td><td>VARCHAR(255)</td><td>이메일</td></tr>
+        <tr><td>website</td><td>VARCHAR(255)</td><td>홈페이지</td></tr>
+        <tr><td>region</td><td>VARCHAR(50)</td><td>지역</td></tr>
+        <tr><td>specialty</td><td>VARCHAR(200)</td><td>진료과목</td></tr>
+        <tr><td>operating_hours</td><td>VARCHAR(200)</td><td>운영시간</td></tr>
+        <tr><td>is_24h</td><td>BOOLEAN</td><td>24시간 여부</td></tr>
+        <tr><td>created_at</td><td>TIMESTAMP</td><td>생성일</td></tr>
+    </table>
+
+    <h3>테이블 생성 SQL</h3>
+    <pre>CREATE TABLE hospitals (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
+    representative VARCHAR(100),
+    address TEXT,
+    phone VARCHAR(20),
+    email VARCHAR(255),
+    website VARCHAR(255),
+    region VARCHAR(50),
+    specialty VARCHAR(200),
+    operating_hours VARCHAR(200),
+    is_24h BOOLEAN DEFAULT FALSE,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- RLS 비활성화 (공개 접근)
+ALTER TABLE hospitals DISABLE ROW LEVEL SECURITY;</pre>
+
+    <h3>저장된 병원 데이터 (10개)</h3>
+    <table>
+        <tr>
+            <th>#</th>
+            <th>병원명</th>
+            <th>대표원장</th>
+            <th>지역</th>
+            <th>진료과목</th>
+        </tr>
+        <tr><td>1</td><td>서로명명치과병원</td><td>이준섭</td><td>서울</td><td>임플란트</td></tr>
+        <tr><td>2</td><td>속초선치과</td><td>양동봉</td><td>강원</td><td>일반진료</td></tr>
+        <tr><td>3</td><td>서울 24시 치과센터</td><td>김성민</td><td>서울</td><td>응급치료</td></tr>
+        <tr><td>4</td><td>우리치과병원</td><td>박지현</td><td>서울</td><td>교정치료</td></tr>
+        <tr><td>5</td><td>행복치과병원</td><td>최수진</td><td>인천</td><td>심미치료</td></tr>
+        <tr><td>6</td><td>화이트서울치과</td><td>임영일</td><td>대전</td><td>심미치료</td></tr>
+        <tr><td>7</td><td>연세치과병원</td><td>노미영</td><td>경기</td><td>교정치료</td></tr>
+        <tr><td>8</td><td>브레이스치과병원</td><td>강민호</td><td>경기</td><td>교정치료</td></tr>
+        <tr><td>9</td><td>스마일치과의원</td><td>정민호</td><td>서울</td><td>일반진료</td></tr>
+        <tr><td>10</td><td>플러스치과</td><td>김태양</td><td>서울</td><td>임플란트</td></tr>
+    </table>
+
+    <h2 class="page-break">4. 프론트엔드 (Frontend)</h2>
+
+    <h3>페이지 구조 (13개 HTML 파일)</h3>
+    <table>
+        <tr>
+            <th>파일</th>
+            <th>메뉴</th>
+        </tr>
+        <tr><td>index.html</td><td>홈 (Supabase 연동)</td></tr>
+        <tr><td>search.html</td><td>병원검색</td></tr>
+        <tr><td>compare.html</td><td>병원비교</td></tr>
+        <tr><td>reviews.html</td><td>환자후기</td></tr>
+        <tr><td>cost.html</td><td>비용안내</td></tr>
+        <tr><td>faq.html</td><td>FAQ</td></tr>
+        <tr><td>blog.html</td><td>블로그</td></tr>
+        <tr><td>education.html</td><td>교육프로그램</td></tr>
+        <tr><td>education-materials.html</td><td>교육 자료</td></tr>
+        <tr><td>media.html</td><td>신문·방송</td></tr>
+        <tr><td>performance-report.html</td><td>성과리포트</td></tr>
+        <tr><td>dashboard-basic.html</td><td>기본 대시보드</td></tr>
+        <tr><td>dashboard-premium.html</td><td>프리미엄 대시보드</td></tr>
+    </table>
+
+    <h3>Supabase 연동 코드</h3>
+    <pre>&lt;!-- SDK 로드 --&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"&gt;&lt;/script&gt;
+
+&lt;script&gt;
+// Supabase 초기화
+const SUPABASE_URL = 'https://haxcktfnuudlqciyljtp.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJ...';
+const { createClient } = supabase;
+const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// 데이터 로드
+async function loadHospitals() {
+    const { data, error } = await supabaseClient
+        .from('hospitals')
+        .select('*')
+        .order('id', { ascending: true })
+        .limit(10);
+    // 테이블 렌더링...
+}
+
+document.addEventListener('DOMContentLoaded', loadHospitals);
+&lt;/script&gt;</pre>
+
+    <h2 class="page-break">5. 배포 (Deployment)</h2>
+
+    <h3>GitHub Pages</h3>
+    <div class="info-box">
+        <strong>라이브 URL:</strong> https://jaiwshim-project.github.io/dentalclinicfinder/<br>
+        <strong>저장소:</strong> https://github.com/jaiwshim-project/dentalclinicfinder
+    </div>
+
+    <h3>배포 명령어</h3>
+    <pre>git add -A
+git commit -m "커밋 메시지"
+git push</pre>
+
+    <div class="warning-box">
+        <strong>참고:</strong> GitHub Pages는 푸시 후 1-2분 내에 자동 배포됩니다.
+    </div>
+
+    <h2>6. 프로젝트 구조</h2>
+    <pre>C:\01 Claude-Code\01 dentalclinicfinder\
+├── index.html (홈 - Supabase 연동)
+├── search.html
+├── compare.html
+├── reviews.html
+├── cost.html
+├── faq.html
+├── blog.html
+├── education.html
+├── education-materials.html
+├── media.html
+├── performance-report.html
+├── dashboard-basic.html
+├── dashboard-premium.html
+├── ai-assistant.png
+└── supabase/
+    ├── .gitignore
+    ├── config.toml
+    └── migrations/
+        └── 20260125000000_init.sql</pre>
+
+    <h2>7. 주요 링크</h2>
+    <table>
+        <tr>
+            <th>항목</th>
+            <th>URL</th>
+        </tr>
+        <tr>
+            <td>라이브 사이트</td>
+            <td>https://jaiwshim-project.github.io/dentalclinicfinder/</td>
+        </tr>
+        <tr>
+            <td>GitHub 저장소</td>
+            <td>https://github.com/jaiwshim-project/dentalclinicfinder</td>
+        </tr>
+        <tr>
+            <td>Supabase 대시보드</td>
+            <td>https://supabase.com/dashboard/project/haxcktfnuudlqciyljtp</td>
+        </tr>
+        <tr>
+            <td>Supabase SQL Editor</td>
+            <td>https://supabase.com/dashboard/project/haxcktfnuudlqciyljtp/sql</td>
+        </tr>
+        <tr>
+            <td>Supabase Table Editor</td>
+            <td>https://supabase.com/dashboard/project/haxcktfnuudlqciyljtp/editor</td>
+        </tr>
+    </table>
+
+    <h2>8. 다음 단계 (선택)</h2>
+    <ul>
+        <li>☐ AI 평가 점수 테이블 추가</li>
+        <li>☐ 나머지 6개 병원 데이터 추가</li>
+        <li>☐ 다른 페이지도 Supabase 연동</li>
+        <li>☐ 사용자 인증 기능 추가</li>
+        <li>☐ 리뷰 기능 추가</li>
+    </ul>
+
+    <div style="margin-top: 60px; padding-top: 20px; border-top: 1px solid #E9ECEF; text-align: center; color: #999; font-size: 14px;">
+        DentalClinicFinder Project Guide | Generated: 2025-01-25
+    </div>
+</body>
+</html>
