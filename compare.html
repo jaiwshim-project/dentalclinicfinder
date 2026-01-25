@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>병원비교 - DentalClinicFinder</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
@@ -68,121 +69,44 @@
         <div class="card" style="margin-bottom: 30px;">
             <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px;">비교할 병원 선택 (최대 3개)</h3>
             <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                <select id="hospital1" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;" onchange="updateComparison()">
                     <option value="">병원 1 선택</option>
-                    <option value="서로명명치과병원">1위 - 서로명명치과병원 (97점)</option>
-                    <option value="속초선치과">2위 - 속초선치과 (94점)</option>
-                    <option value="서울24시치과센터">3위 - 서울24시치과센터 (93점)</option>
-                    <option value="우리치과병원">4위 - 우리치과병원 (92점)</option>
-                    <option value="행복치과병원">5위 - 행복치과병원 (92점)</option>
-                    <option value="화이트서울치과">6위 - 화이트서울치과 (90점)</option>
                 </select>
-                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                <select id="hospital2" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;" onchange="updateComparison()">
                     <option value="">병원 2 선택</option>
-                    <option value="서로명명치과병원">1위 - 서로명명치과병원 (97점)</option>
-                    <option value="속초선치과">2위 - 속초선치과 (94점)</option>
-                    <option value="서울24시치과센터">3위 - 서울24시치과센터 (93점)</option>
-                    <option value="우리치과병원">4위 - 우리치과병원 (92점)</option>
-                    <option value="행복치과병원">5위 - 행복치과병원 (92점)</option>
-                    <option value="화이트서울치과">6위 - 화이트서울치과 (90점)</option>
                 </select>
-                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                <select id="hospital3" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;" onchange="updateComparison()">
                     <option value="">병원 3 선택 (선택사항)</option>
-                    <option value="서로명명치과병원">1위 - 서로명명치과병원 (97점)</option>
-                    <option value="속초선치과">2위 - 속초선치과 (94점)</option>
-                    <option value="서울24시치과센터">3위 - 서울24시치과센터 (93점)</option>
-                    <option value="우리치과병원">4위 - 우리치과병원 (92점)</option>
-                    <option value="행복치과병원">5위 - 행복치과병원 (92점)</option>
-                    <option value="화이트서울치과">6위 - 화이트서울치과 (90점)</option>
                 </select>
             </div>
             <div style="text-align: center; margin-top: 20px;">
-                <button onclick="alert('비교 기능 준비중입니다!')" style="background: #8B5CF6; color: white; padding: 12px 40px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">비교하기</button>
+                <button onclick="updateComparison()" style="background: #8B5CF6; color: white; padding: 12px 40px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">비교하기</button>
             </div>
         </div>
 
         <!-- Comparison Table -->
         <div class="card" style="overflow-x: auto;">
-            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px;">TOP 3 병원 비교표</h3>
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px;">병원 비교표</h3>
             <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
-                <thead>
+                <thead id="compareTableHead">
                     <tr style="background: #F8F9FA;">
                         <th style="padding: 15px; text-align: left; font-weight: 700; border-bottom: 2px solid #E9ECEF; width: 200px;">비교 항목</th>
-                        <th style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
-                            <div style="color: #8B5CF6; font-size: 18px;">&#129351; 1위</div>
-                            <div style="margin-top: 5px;">서로명명치과병원</div>
+                        <th id="header1" style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
+                            <div style="color: #8B5CF6; font-size: 18px;">&#129351; 1번</div>
+                            <div style="margin-top: 5px;">병원을 선택하세요</div>
                         </th>
-                        <th style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
-                            <div style="color: #8B5CF6; font-size: 18px;">&#129352; 2위</div>
-                            <div style="margin-top: 5px;">속초선치과</div>
+                        <th id="header2" style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
+                            <div style="color: #8B5CF6; font-size: 18px;">&#129352; 2번</div>
+                            <div style="margin-top: 5px;">병원을 선택하세요</div>
                         </th>
-                        <th style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
-                            <div style="color: #8B5CF6; font-size: 18px;">&#129353; 3위</div>
-                            <div style="margin-top: 5px;">서울24시치과센터</div>
+                        <th id="header3" style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
+                            <div style="color: #8B5CF6; font-size: 18px;">&#129353; 3번</div>
+                            <div style="margin-top: 5px;">병원을 선택하세요</div>
                         </th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">DF-AI 신뢰 점수</td>
-                        <td style="padding: 15px; text-align: center;"><span style="background: #8B5CF6; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700;">97점</span></td>
-                        <td style="padding: 15px; text-align: center;"><span style="background: #8B5CF6; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700;">94점</span></td>
-                        <td style="padding: 15px; text-align: center;"><span style="background: #8B5CF6; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700;">93점</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">원장</td>
-                        <td style="padding: 15px; text-align: center;">이준섭</td>
-                        <td style="padding: 15px; text-align: center;">양동봉</td>
-                        <td style="padding: 15px; text-align: center;">김성민</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">전문 분야</td>
-                        <td style="padding: 15px; text-align: center;">임플란트</td>
-                        <td style="padding: 15px; text-align: center;">일반진료</td>
-                        <td style="padding: 15px; text-align: center;">심미치료</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">지역</td>
-                        <td style="padding: 15px; text-align: center;">서울 강남구</td>
-                        <td style="padding: 15px; text-align: center;">강원 속초시</td>
-                        <td style="padding: 15px; text-align: center;">서울 중구</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">AI톡 운영</td>
-                        <td style="padding: 15px; text-align: center;"><span style="color: #EF4444;">&#10060;</span></td>
-                        <td style="padding: 15px; text-align: center;"><span style="color: #06D6A0; font-weight: 700;">&#9989; 운영중</span></td>
-                        <td style="padding: 15px; text-align: center;"><span style="color: #EF4444;">&#10060;</span></td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">신문 기사</td>
-                        <td style="padding: 15px; text-align: center;">1건 (30점)</td>
-                        <td style="padding: 15px; text-align: center;">0건</td>
-                        <td style="padding: 15px; text-align: center;">0건</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">방송 출연</td>
-                        <td style="padding: 15px; text-align: center;">0건</td>
-                        <td style="padding: 15px; text-align: center;">1건 (50점)</td>
-                        <td style="padding: 15px; text-align: center;">1건 (50점)</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">소통 점수</td>
-                        <td style="padding: 15px; text-align: center;">30점</td>
-                        <td style="padding: 15px; text-align: center;"><span style="color: #06D6A0; font-weight: 700;">550점</span></td>
-                        <td style="padding: 15px; text-align: center;">50점</td>
-                    </tr>
-                    <tr style="border-bottom: 1px solid #F1F3F5;">
-                        <td style="padding: 15px; font-weight: 600;">환자 평가</td>
-                        <td style="padding: 15px; text-align: center;">&#11088;&#11088;&#11088;&#11088;&#11088;</td>
-                        <td style="padding: 15px; text-align: center;">&#11088;&#11088;&#11088;&#11088;&#11088;</td>
-                        <td style="padding: 15px; text-align: center;">&#11088;&#11088;&#11088;&#11088;&#11088;</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 15px; font-weight: 600;">병원 유형</td>
-                        <td style="padding: 15px; text-align: center;">종합병원</td>
-                        <td style="padding: 15px; text-align: center;">일반치과</td>
-                        <td style="padding: 15px; text-align: center;">24시센터</td>
-                    </tr>
+                <tbody id="compareTableBody">
+                    <tr><td colspan="4" style="padding: 40px; text-align: center; color: var(--text-gray);">비교할 병원을 선택하세요</td></tr>
                 </tbody>
             </table>
         </div>
@@ -258,5 +182,138 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        // Supabase 설정
+        const SUPABASE_URL = 'https://haxcktfnuudlqciyljtp.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhheGNrdGZudXVkbHFjaXlsanRwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjkzMDUwNDAsImV4cCI6MjA4NDg4MTA0MH0.suN7BeaHx3MjaNlMDQa0940P-rMl2XPyk4ksoQEU3YM';
+        const { createClient } = supabase;
+        const supabaseClient = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        let hospitals = [];
+
+        // 페이지 로드 시 병원 데이터 불러오기
+        async function loadHospitals() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('hospitals')
+                    .select('*')
+                    .order('id', { ascending: true });
+
+                if (error) throw error;
+
+                hospitals = data;
+                populateSelects();
+            } catch (err) {
+                console.error('Error loading hospitals:', err);
+                alert('병원 데이터를 불러오는데 실패했습니다.');
+            }
+        }
+
+        function populateSelects() {
+            const selects = ['hospital1', 'hospital2', 'hospital3'];
+
+            selects.forEach((selectId, index) => {
+                const select = document.getElementById(selectId);
+                const placeholder = index === 2 ? '병원 3 선택 (선택사항)' : `병원 ${index + 1} 선택`;
+
+                select.innerHTML = `<option value="">${placeholder}</option>`;
+
+                hospitals.forEach((h, i) => {
+                    select.innerHTML += `<option value="${h.id}">${i + 1}위 - ${h.name}</option>`;
+                });
+            });
+        }
+
+        function updateComparison() {
+            const h1 = hospitals.find(h => h.id == document.getElementById('hospital1').value);
+            const h2 = hospitals.find(h => h.id == document.getElementById('hospital2').value);
+            const h3 = hospitals.find(h => h.id == document.getElementById('hospital3').value);
+
+            // Update headers
+            document.getElementById('header1').innerHTML = h1
+                ? `<div style="color: #8B5CF6; font-size: 18px;">&#129351; 1번</div><div style="margin-top: 5px;">${h1.name}</div>`
+                : `<div style="color: #8B5CF6; font-size: 18px;">&#129351; 1번</div><div style="margin-top: 5px;">병원을 선택하세요</div>`;
+
+            document.getElementById('header2').innerHTML = h2
+                ? `<div style="color: #8B5CF6; font-size: 18px;">&#129352; 2번</div><div style="margin-top: 5px;">${h2.name}</div>`
+                : `<div style="color: #8B5CF6; font-size: 18px;">&#129352; 2번</div><div style="margin-top: 5px;">병원을 선택하세요</div>`;
+
+            document.getElementById('header3').innerHTML = h3
+                ? `<div style="color: #8B5CF6; font-size: 18px;">&#129353; 3번</div><div style="margin-top: 5px;">${h3.name}</div>`
+                : `<div style="color: #8B5CF6; font-size: 18px;">&#129353; 3번</div><div style="margin-top: 5px;">병원을 선택하세요</div>`;
+
+            // Update table body
+            const tbody = document.getElementById('compareTableBody');
+
+            if (!h1 && !h2 && !h3) {
+                tbody.innerHTML = '<tr><td colspan="4" style="padding: 40px; text-align: center; color: var(--text-gray);">비교할 병원을 선택하세요</td></tr>';
+                return;
+            }
+
+            const getSpecialty = (h) => h && h.specialty ? h.specialty.split(',')[0].trim() : '-';
+            const getSpecialized = (h) => h && h.specialty ? (h.specialty.split(',')[1] || '').trim() || '-' : '-';
+            const getIs24h = (h) => h && h.is_24h ? '<span style="color: #06D6A0; font-weight: 700;">&#9989; 24시</span>' : '<span style="color: #EF4444;">&#10060;</span>';
+
+            tbody.innerHTML = `
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">대표원장</td>
+                    <td style="padding: 15px; text-align: center;">${h1 ? h1.representative || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h2 ? h2.representative || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h3 ? h3.representative || '-' : '-'}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">전문 분야</td>
+                    <td style="padding: 15px; text-align: center;">${getSpecialty(h1)}</td>
+                    <td style="padding: 15px; text-align: center;">${getSpecialty(h2)}</td>
+                    <td style="padding: 15px; text-align: center;">${getSpecialty(h3)}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">특화진료</td>
+                    <td style="padding: 15px; text-align: center;">${getSpecialized(h1)}</td>
+                    <td style="padding: 15px; text-align: center;">${getSpecialized(h2)}</td>
+                    <td style="padding: 15px; text-align: center;">${getSpecialized(h3)}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">지역</td>
+                    <td style="padding: 15px; text-align: center;">${h1 ? h1.region || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h2 ? h2.region || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h3 ? h3.region || '-' : '-'}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">주소</td>
+                    <td style="padding: 15px; text-align: center; font-size: 13px;">${h1 ? h1.address || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center; font-size: 13px;">${h2 ? h2.address || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center; font-size: 13px;">${h3 ? h3.address || '-' : '-'}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">전화번호</td>
+                    <td style="padding: 15px; text-align: center;">${h1 ? h1.phone || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h2 ? h2.phone || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h3 ? h3.phone || '-' : '-'}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">24시간 운영</td>
+                    <td style="padding: 15px; text-align: center;">${getIs24h(h1)}</td>
+                    <td style="padding: 15px; text-align: center;">${getIs24h(h2)}</td>
+                    <td style="padding: 15px; text-align: center;">${getIs24h(h3)}</td>
+                </tr>
+                <tr style="border-bottom: 1px solid #F1F3F5;">
+                    <td style="padding: 15px; font-weight: 600;">운영시간</td>
+                    <td style="padding: 15px; text-align: center; font-size: 13px;">${h1 ? h1.operating_hours || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center; font-size: 13px;">${h2 ? h2.operating_hours || '-' : '-'}</td>
+                    <td style="padding: 15px; text-align: center; font-size: 13px;">${h3 ? h3.operating_hours || '-' : '-'}</td>
+                </tr>
+                <tr>
+                    <td style="padding: 15px; font-weight: 600;">홈페이지</td>
+                    <td style="padding: 15px; text-align: center;">${h1 && h1.website ? '<a href="' + h1.website + '" target="_blank" style="color: #3B82F6;">방문</a>' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h2 && h2.website ? '<a href="' + h2.website + '" target="_blank" style="color: #3B82F6;">방문</a>' : '-'}</td>
+                    <td style="padding: 15px; text-align: center;">${h3 && h3.website ? '<a href="' + h3.website + '" target="_blank" style="color: #3B82F6;">방문</a>' : '-'}</td>
+                </tr>
+            `;
+        }
+
+        document.addEventListener('DOMContentLoaded', loadHospitals);
+    </script>
 </body>
 </html>
