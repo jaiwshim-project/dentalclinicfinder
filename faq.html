@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .faq-category { padding: 10px 20px; border: 2px solid #E9ECEF; background: white; border-radius: 20px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+        .faq-category:hover { border-color: #3B82F6; color: #3B82F6; }
+        .faq-category.active { background: #3B82F6; color: white; border-color: #3B82F6; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-item.active .faq-answer { display: block !important; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link active" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%); padding: 50px; border-radius: 16px; margin-bottom: 40px; text-align: center;">
+            <h2 style="font-size: 36px; font-weight: 900; color: white; margin-bottom: 15px;">&#10067; 자주 묻는 질문 (FAQ)</h2>
+            <p style="font-size: 16px; color: rgba(255,255,255,0.9);">DentalClinicFinder 이용에 대해 궁금하신 점을 확인하세요</p>
+        </div>
+
+        <!-- Search Bar -->
+        <div style="margin-bottom: 30px;">
+            <input type="text" id="faqSearch" placeholder="&#128269; 궁금한 내용을 검색하세요..." style="width: 100%; padding: 18px 24px; border: 2px solid #E9ECEF; border-radius: 12px; font-size: 16px;" onkeyup="filterFAQ()">
+        </div>
+
+        <!-- FAQ Categories -->
+        <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+            <button class="faq-category active" onclick="filterFAQCategory('all', event)">전체</button>
+            <button class="faq-category" onclick="filterFAQCategory('service', event)">서비스 이용</button>
+            <button class="faq-category" onclick="filterFAQCategory('trust', event)">신뢰 점수</button>
+            <button class="faq-category" onclick="filterFAQCategory('premium', event)">프리미엄</button>
+            <button class="faq-category" onclick="filterFAQCategory('hospital', event)">병원 등록</button>
+        </div>
+
+        <!-- FAQ Items -->
+        <div id="faqList">
+            <!-- Service FAQs -->
+            <div class="faq-item card" data-category="service" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #3B82F6; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">서비스 이용</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">DentalClinicFinder는 어떤 서비스인가요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    DentalClinicFinder는 AI 기반으로 치과병원의 신뢰도와 소통 능력을 평가하는 플랫폼입니다. Claude, GPT, Grok 3가지 AI가 병원 정보를 분석하여 객관적인 신뢰 점수를 제공합니다.
+                </div>
+            </div>
+
+            <div class="faq-item card" data-category="service" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #3B82F6; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">서비스 이용</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">무료로 이용할 수 있나요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    네, 기본 서비스는 무료입니다. TOP 10 병원 순위, 기본 신뢰 점수, 지역별 검색 등을 무료로 이용하실 수 있습니다. 프리미엄 회원은 상세 분석, 병원 비교, 전문가 상담 등 추가 혜택을 받으실 수 있습니다.
+                </div>
+            </div>
+
+            <!-- Trust Score FAQs -->
+            <div class="faq-item card" data-category="trust" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #06D6A0; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">신뢰 점수</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">DF-AI 신뢰 점수는 어떻게 계산되나요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    DF-AI 신뢰 점수 = AI 평가 점수(70%) + 소통 점수(30%)<br><br>
+                    <strong>AI 평가:</strong> Claude, GPT, Grok 3개 AI의 평균<br>
+                    <strong>소통 점수:</strong> AI톡(500점) + 신문기사(30점/건) + 방송출연(50점/건)
+                </div>
+            </div>
+
+            <div class="faq-item card" data-category="trust" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #06D6A0; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">신뢰 점수</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">소통 점수는 왜 중요한가요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    소통 점수는 병원이 환자와 얼마나 적극적으로 소통하는지를 나타냅니다. AI톡 운영 병원은 24시간 상담이 가능하며, 언론 활동이 활발한 병원은 투명성과 전문성을 인정받았다는 의미입니다.
+                </div>
+            </div>
+
+            <!-- Premium FAQs -->
+            <div class="faq-item card" data-category="premium" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #FB923C; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">프리미엄</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">프리미엄 회원의 혜택은 무엇인가요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    &#9989; 병원 상세 분석 리포트<br>
+                    &#9989; 최대 3개 병원 비교 기능<br>
+                    &#9989; AI별 개별 평가 내용 확인<br>
+                    &#9989; 월간 치과 건강 리포트<br>
+                    &#9989; 전문가 1:1 상담 (월 2회)<br>
+                    &#9989; 교육 프로그램 30% 할인<br>
+                    &#9989; 제휴 병원 진료비 5-10% 할인
+                </div>
+            </div>
+
+            <!-- Hospital FAQs -->
+            <div class="faq-item card" data-category="hospital" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #EC4899; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">병원 등록</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">우리 병원을 등록하려면 어떻게 하나요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    등록 절차:<br>
+                    1. 등록 신청 (홈페이지 하단 또는 문의 페이지)<br>
+                    2. 병원 기본 정보 제출<br>
+                    3. AI 자동 평가 진행 (2-3일)<br>
+                    4. 평가 결과 확인<br>
+                    5. 등록 완료 및 대시보드 이용 시작<br><br>
+                    등록비는 무료이며, 프리미엄 대시보드 이용 시에만 월 이용료가 발생합니다.
+                </div>
+            </div>
+
+            <div class="faq-item card" data-category="hospital" style="margin-bottom: 15px; cursor: pointer;" onclick="toggleFAQ(this)">
+                <div style="display: flex; justify-content: space-between; align-items: start;">
+                    <div style="flex: 1;">
+                        <span style="background: #EC4899; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-right: 10px;">병원 등록</span>
+                        <h3 style="font-size: 18px; font-weight: 700; margin-top: 12px;">AI톡을 운영하면 어떤 장점이 있나요?</h3>
+                    </div>
+                    <div class="faq-icon" style="font-size: 24px; transition: transform 0.3s;">&#9660;</div>
+                </div>
+                <div class="faq-answer" style="display: none; margin-top: 20px; padding-top: 20px; border-top: 1px solid #E9ECEF; line-height: 1.8; color: var(--text-gray);">
+                    <strong>소통 점수:</strong> 즉시 +500점 (가장 높은 배점)<br>
+                    <strong>환자 만족도:</strong> 24시간 실시간 상담, 대기 시간 없음<br>
+                    <strong>업무 효율성:</strong> 반복 질문 자동 응답, 직원 부담 70% 감소<br><br>
+                    AI톡 도입 문의: support@dentalclinicfinder.kr
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact CTA -->
+        <div class="card" style="background: linear-gradient(135deg, #06D6A0, #05C090); color: white; text-align: center; padding: 40px; margin-top: 40px;">
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 15px;">찾으시는 답변이 없으신가요?</h3>
+            <p style="margin-bottom: 25px; opacity: 0.9;">언제든지 문의해 주세요. 전문 상담팀이 24시간 이내에 답변드립니다.</p>
+            <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
+                <a href="mailto:support@dentalclinicfinder.kr" style="background: white; color: #06D6A0; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 700;">&#128231; 이메일 문의</a>
+                <a href="tel:1588-0000" style="background: rgba(255,255,255,0.2); color: white; padding: 12px 30px; border-radius: 8px; text-decoration: none; font-weight: 700; border: 2px solid white;">&#128222; 1588-0000</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="compare.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 비교</a>
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            element.classList.toggle('active');
+        }
+
+        function filterFAQ() {
+            const searchTerm = document.getElementById('faqSearch').value.toLowerCase();
+            const items = document.querySelectorAll('.faq-item');
+
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                if (text.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        function filterFAQCategory(category, event) {
+            const items = document.querySelectorAll('.faq-item');
+            const buttons = document.querySelectorAll('.faq-category');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+    </script>
+</body>
+</html>

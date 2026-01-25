@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>비용안내 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link active" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #FB923C 0%, #EA580C 100%); padding: 50px; border-radius: 16px; margin-bottom: 40px; text-align: center; color: white;">
+            <h2 style="font-size: 36px; font-weight: 900; margin-bottom: 15px;">&#128176; 치과 비용 안내</h2>
+            <p style="font-size: 16px; opacity: 0.9;">투명한 가격 정보로 합리적인 선택을 도와드립니다</p>
+        </div>
+
+        <!-- Cost Tables -->
+        <div style="display: grid; gap: 30px;">
+
+            <!-- Implant Costs -->
+            <div class="card">
+                <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #06D6A0;">&#129463; 임플란트</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #F8F9FA; border-bottom: 2px solid #E9ECEF;">
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">진료 항목</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">평균 비용</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">보험 적용</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">임플란트 (1개)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #06D6A0;">120만원~180만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #E8F8F3; color: #06D6A0; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">65세 이상</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">국산/수입산에 따라 차이</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">뼈이식</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #06D6A0;">30만원~80만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #FEF2F2; color: #EF4444; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">비급여</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">필요 시에만 진행</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">상악동 거상술</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #06D6A0;">50만원~100만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #FEF2F2; color: #EF4444; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">비급여</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">윗니 임플란트 시</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Orthodontics Costs -->
+            <div class="card">
+                <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #3B82F6;">&#128295; 교정치료</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #F8F9FA; border-bottom: 2px solid #E9ECEF;">
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">진료 항목</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">평균 비용</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">기간</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">메탈 교정</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #3B82F6;">300만원~500만원</td>
+                            <td style="padding: 15px; text-align: center;">18~24개월</td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">가장 경제적</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">세라믹 교정</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #3B82F6;">400만원~600만원</td>
+                            <td style="padding: 15px; text-align: center;">18~24개월</td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">눈에 덜 띔</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">투명 교정 (인비절라인)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #3B82F6;">500만원~800만원</td>
+                            <td style="padding: 15px; text-align: center;">12~18개월</td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">탈부착 가능</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">설측 교정</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #3B82F6;">700만원~1000만원</td>
+                            <td style="padding: 15px; text-align: center;">24~30개월</td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">완전히 안 보임</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Cosmetic Dentistry Costs -->
+            <div class="card">
+                <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #EC4899;">&#10024; 심미치료</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #F8F9FA; border-bottom: 2px solid #E9ECEF;">
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">진료 항목</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">평균 비용</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">보험 적용</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">라미네이트 (1개)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #EC4899;">80만원~150만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #FEF2F2; color: #EF4444; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">비급여</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">앞니 주로 시술</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">올세라믹 크라운 (1개)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #EC4899;">60만원~120만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #FEF2F2; color: #EF4444; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">비급여</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">금속 알레르기 없음</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">치아 미백 (전체)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #EC4899;">30만원~80만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #FEF2F2; color: #EF4444; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">비급여</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">지속 기간 1~2년</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- General Dentistry Costs -->
+            <div class="card">
+                <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px; color: #10B981;">&#127973; 일반진료</h3>
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background: #F8F9FA; border-bottom: 2px solid #E9ECEF;">
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">진료 항목</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">평균 비용</th>
+                            <th style="padding: 15px; text-align: center; font-weight: 700;">보험 적용</th>
+                            <th style="padding: 15px; text-align: left; font-weight: 700;">비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">스케일링</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #10B981;">1만원~3만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #E8F8F3; color: #06D6A0; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">연 1회</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">정기검진 필수</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">충치 치료 (레진)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #10B981;">5만원~15만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #E8F8F3; color: #06D6A0; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">일부 적용</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">범위에 따라 차이</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">신경 치료 (근관치료)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #10B981;">15만원~50만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #E8F8F3; color: #06D6A0; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">적용</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">치아 위치에 따라</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 15px;">발치 (사랑니)</td>
+                            <td style="padding: 15px; text-align: center; font-weight: 700; color: #10B981;">5만원~30만원</td>
+                            <td style="padding: 15px; text-align: center;"><span style="background: #E8F8F3; color: #06D6A0; padding: 4px 12px; border-radius: 12px; font-size: 13px; font-weight: 700;">적용</span></td>
+                            <td style="padding: 15px; color: var(--text-gray); font-size: 14px;">난이도에 따라</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Insurance Info -->
+        <div class="card" style="background: #EFF6FF; border: 2px solid #3B82F6; margin-top: 30px;">
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px; color: #3B82F6;">&#128203; 건강보험 적용 안내</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">&#9989; 보험 적용 항목</h4>
+                    <ul style="line-height: 2; color: var(--text-gray);">
+                        <li>스케일링 (연 1회)</li>
+                        <li>충치 치료 (일반 재료)</li>
+                        <li>신경 치료</li>
+                        <li>발치</li>
+                        <li>임플란트 (65세 이상, 평생 2개)</li>
+                        <li>틀니 (65세 이상)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">&#10060; 비급여 항목</h4>
+                    <ul style="line-height: 2; color: var(--text-gray);">
+                        <li>교정치료 (전체)</li>
+                        <li>임플란트 (65세 미만)</li>
+                        <li>라미네이트</li>
+                        <li>치아 미백</li>
+                        <li>세라믹/지르코니아 보철</li>
+                        <li>뼈이식, 상악동 거상술</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Saving Tips -->
+        <div class="card" style="background: linear-gradient(135deg, #FB923C, #EA580C); color: white; margin-top: 30px;">
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 20px;">&#128161; 치과 비용 절감 TIP</h3>
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 10px;">1&#65039;&#8419;</div>
+                    <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">정기검진 활용</h4>
+                    <p style="opacity: 0.9; line-height: 1.6;">6개월마다 정기검진으로 조기 발견하면 치료 비용을 70% 절감할 수 있습니다.</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 10px;">2&#65039;&#8419;</div>
+                    <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">실손보험 확인</h4>
+                    <p style="opacity: 0.9; line-height: 1.6;">가입한 실손보험에서 비급여 항목도 일부 보장받을 수 있습니다.</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 10px;">3&#65039;&#8419;</div>
+                    <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">복수 병원 상담</h4>
+                    <p style="opacity: 0.9; line-height: 1.6;">2-3곳 병원에서 견적을 받아 비교하면 합리적인 선택이 가능합니다.</p>
+                </div>
+                <div>
+                    <div style="font-size: 40px; margin-bottom: 10px;">4&#65039;&#8419;</div>
+                    <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 10px;">카드 할부/이벤트</h4>
+                    <p style="opacity: 0.9; line-height: 1.6;">신용카드 무이자 할부나 병원 이벤트를 활용하세요.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Calculator CTA -->
+        <div class="card" style="text-align: center; padding: 40px; margin-top: 30px; border: 3px dashed #E9ECEF;">
+            <div style="font-size: 48px; margin-bottom: 15px;">&#129518;</div>
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 15px;">간편 비용 계산기</h3>
+            <p style="color: var(--text-gray); margin-bottom: 25px;">진료 항목을 선택하시면 예상 비용을 계산해드립니다</p>
+            <button style="background: #FB923C; color: white; padding: 14px 40px; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer;">계산하기 (준비중)</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="compare.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 비교</a>
+                        <a href="cost.html" style="color: #94A3B8; text-decoration: none; display: block;">비용 안내</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

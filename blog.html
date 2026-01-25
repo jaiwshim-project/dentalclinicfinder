@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>블로그 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link active" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #10B981 0%, #059669 100%); padding: 50px; border-radius: 16px; margin-bottom: 40px; text-align: center; color: white;">
+            <h2 style="font-size: 36px; font-weight: 900; margin-bottom: 15px;">&#128240; 블로그 & 뉴스</h2>
+            <p style="font-size: 16px; opacity: 0.9;">치과 건강 정보와 업계 소식을 전해드립니다</p>
+        </div>
+
+        <!-- Category Filter -->
+        <div style="display: flex; gap: 10px; margin-bottom: 30px; flex-wrap: wrap;">
+            <button style="padding: 10px 20px; border: 2px solid #10B981; background: #10B981; color: white; border-radius: 20px; cursor: pointer; font-weight: 600;">전체</button>
+            <button style="padding: 10px 20px; border: 2px solid #E9ECEF; background: white; color: var(--text-dark); border-radius: 20px; cursor: pointer; font-weight: 600;">구강 건강</button>
+            <button style="padding: 10px 20px; border: 2px solid #E9ECEF; background: white; color: var(--text-dark); border-radius: 20px; cursor: pointer; font-weight: 600;">업계 뉴스</button>
+            <button style="padding: 10px 20px; border: 2px solid #E9ECEF; background: white; color: var(--text-dark); border-radius: 20px; cursor: pointer; font-weight: 600;">전문의 칼럼</button>
+            <button style="padding: 10px 20px; border: 2px solid #E9ECEF; background: white; color: var(--text-dark); border-radius: 20px; cursor: pointer; font-weight: 600;">치료 가이드</button>
+        </div>
+
+        <!-- Featured Post -->
+        <div class="card" style="display: grid; grid-template-columns: 400px 1fr; gap: 30px; margin-bottom: 30px;">
+            <div>
+                <img src="https://images.unsplash.com/photo-1606811971618-4486d14f3f99?w=400&h=250&fit=crop" alt="치과 건강" style="width: 100%; height: 250px; object-fit: cover; border-radius: 12px;">
+            </div>
+            <div>
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #10B981; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">구강 건강</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.30</span>
+                </div>
+                <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 15px;">2025년 꼭 알아야 할 치과 건강 트렌드 5가지</h3>
+                <p style="line-height: 1.8; color: var(--text-gray); margin-bottom: 20px;">
+                    디지털 치과 기술의 발전으로 치료 방식이 크게 변화하고 있습니다.
+                    3D 프린팅 기술을 활용한 맞춤형 보철물, AI 기반 진단 시스템,
+                    그리고 비침습적 치료 방법들이 주목받고 있습니다.
+                    특히 AI를 활용한 조기 진단으로 충치와 잇몸 질환을 예방할 수 있는 시대가 왔습니다.
+                </p>
+                <a href="#" style="color: #10B981; font-weight: 700; text-decoration: none;">자세히 보기 &#8594;</a>
+            </div>
+        </div>
+
+        <!-- Blog Posts Grid -->
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+
+            <!-- Post 1 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&h=200&fit=crop" alt="임플란트" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #3B82F6; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">치료 가이드</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.28</span>
+                </div>
+                <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">임플란트 수술 전 꼭 알아야 할 7가지</h4>
+                <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">
+                    임플란트는 자연치아와 가장 유사한 치료법입니다. 하지만 성공적인 임플란트를 위해서는 충분한 뼈의 양과 질, 전신 건강 상태, 그리고 사후 관리가 중요합니다...
+                </p>
+                <a href="#" style="color: #3B82F6; font-weight: 600; text-decoration: none; font-size: 14px;">더 읽기 &#8594;</a>
+            </div>
+
+            <!-- Post 2 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&h=200&fit=crop" alt="교정" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #EC4899; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">전문의 칼럼</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.25</span>
+                </div>
+                <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">성인 교정, 늦지 않았습니다</h4>
+                <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">
+                    많은 성인들이 "나이가 너무 많아서"라며 교정을 포기합니다. 하지만 현대 교정 기술은 나이와 관계없이 효과적입니다. 투명 교정으로 눈에 띄지 않게...
+                </p>
+                <a href="#" style="color: #EC4899; font-weight: 600; text-decoration: none; font-size: 14px;">더 읽기 &#8594;</a>
+            </div>
+
+            <!-- Post 3 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1598256989800-fe5f95da9787?w=600&h=200&fit=crop" alt="스케일링" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #10B981; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">구강 건강</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.22</span>
+                </div>
+                <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">스케일링, 1년에 몇 번이 적당할까?</h4>
+                <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">
+                    건강보험으로 연 1회 스케일링이 가능하지만, 치석이 많이 쌓이는 분들은 6개월마다 받는 것이 좋습니다. 잇몸 질환 예방의 핵심은...
+                </p>
+                <a href="#" style="color: #10B981; font-weight: 600; text-decoration: none; font-size: 14px;">더 읽기 &#8594;</a>
+            </div>
+
+            <!-- Post 4 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=600&h=200&fit=crop" alt="뉴스" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #FB923C; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">업계 뉴스</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.20</span>
+                </div>
+                <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">AI 기반 치과 진단, 정확도 95% 돌파</h4>
+                <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">
+                    서울대 치과병원과 AI 스타트업의 공동 연구 결과, AI의 충치 진단 정확도가 95%를 넘어섰습니다. 이는 숙련된 치과의사와 비슷한 수준으로...
+                </p>
+                <a href="#" style="color: #FB923C; font-weight: 600; text-decoration: none; font-size: 14px;">더 읽기 &#8594;</a>
+            </div>
+
+            <!-- Post 5 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&h=200&fit=crop" alt="어린이" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #10B981; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">구강 건강</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.18</span>
+                </div>
+                <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">아이의 첫 치과 방문, 언제가 좋을까?</h4>
+                <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">
+                    대한치과의사협회는 첫 유치가 나온 후 6개월 이내, 늦어도 돌 전에 첫 검진을 권장합니다. 조기 검진으로 충치 예방과 올바른 구강 습관을...
+                </p>
+                <a href="#" style="color: #10B981; font-weight: 600; text-decoration: none; font-size: 14px;">더 읽기 &#8594;</a>
+            </div>
+
+            <!-- Post 6 -->
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1611601322863-62cc5f45b814?w=600&h=200&fit=crop" alt="칼럼" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; margin-bottom: 15px;">
+                <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+                    <span style="background: #EC4899; color: white; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700;">전문의 칼럼</span>
+                    <span style="color: var(--text-gray); font-size: 13px; padding: 4px 0;">2025.12.15</span>
+                </div>
+                <h4 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">자연치아 보존, 왜 중요한가?</h4>
+                <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px; margin-bottom: 15px;">
+                    임플란트가 아무리 좋아도 자연치아를 대신할 수는 없습니다. 자연치아에는 치주인대가 있어 음식의 질감을 느낄 수 있고, 교합력 조절이 가능합니다...
+                </p>
+                <a href="#" style="color: #EC4899; font-weight: 600; text-decoration: none; font-size: 14px;">더 읽기 &#8594;</a>
+            </div>
+        </div>
+
+        <!-- Newsletter Subscription -->
+        <div class="card" style="background: linear-gradient(135deg, #10B981, #059669); color: white; text-align: center; padding: 40px; margin-top: 40px;">
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 15px;">&#128236; 뉴스레터 구독하기</h3>
+            <p style="margin-bottom: 25px; opacity: 0.9;">매주 화요일, 유익한 치과 건강 정보를 이메일로 받아보세요!</p>
+            <div style="display: flex; gap: 10px; justify-content: center; max-width: 500px; margin: 0 auto;">
+                <input type="email" placeholder="이메일 주소를 입력하세요" style="flex: 1; padding: 14px 20px; border: none; border-radius: 8px; font-size: 15px;">
+                <button style="background: white; color: #10B981; padding: 14px 30px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">구독하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="blog.html" style="color: #94A3B8; text-decoration: none; display: block;">블로그</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

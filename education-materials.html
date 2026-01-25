@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교육 자료 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .btn-primary { background: #06D6A0; color: white; padding: 10px 20px; border-radius: 8px; border: none; font-weight: 700; cursor: pointer; font-size: 14px; font-family: 'Noto Sans KR', sans-serif; text-decoration: none; display: inline-block; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link active" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #E8F8F3 0%, #D1F2E8 100%); padding: 40px; border-radius: 16px; margin-bottom: 40px; text-align: center;">
+            <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 15px;">&#128218; 교육 자료</h2>
+            <p style="font-size: 16px; color: var(--text-gray);">치과 병원 경영과 환자 소통을 위한 실전 교육 자료</p>
+        </div>
+
+        <!-- Education Materials Grid -->
+        <div style="display: grid; gap: 30px;">
+
+            <!-- 1. 온라인 영상 교육 -->
+            <div class="card" style="display: grid; grid-template-columns: 300px 1fr 250px; gap: 30px; align-items: center;">
+                <div>
+                    <a href="https://youtu.be/YGtpp33Jxws?si=SFbA5861PqPgdlJI" target="_blank">
+                        <img src="https://i.ytimg.com/vi/YGtpp33Jxws/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/YGtpp33Jxws/0.jpg'" alt="치과에도 신뢰 점수가 있다면?" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </div>
+                <div>
+                    <div style="background: linear-gradient(135deg, #06D6A0, #05C090); color: white; display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">온라인 영상 교육</div>
+                    <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">치과에도 신뢰 점수가 있다면?</h3>
+                    <p style="font-size: 14px; color: var(--text-gray); line-height: 1.6; margin-bottom: 15px;">
+                        핵심: 신뢰 전략을 통해 신뢰도를 높여 환자 수를 늘리고, 재방문율 자동 상승시킬 수 있는 신뢰 기술을 알려드립니다.
+                    </p>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <a href="https://youtu.be/YGtpp33Jxws?si=SFbA5861PqPgdlJI" target="_blank" style="color: #06D6A0; font-size: 14px; text-decoration: none; font-weight: 600;">https://youtu.be/YGtpp33Jxws</a>
+                        <div style="padding: 8px 12px; border: 2px solid #06D6A0; border-radius: 8px; font-size: 12px; font-weight: 700;">QR 코드</div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 120px; height: 120px; background: white; border: 3px solid #06D6A0; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                        <div style="font-size: 48px;">&#128241;</div>
+                    </div>
+                    <a href="https://youtu.be/YGtpp33Jxws?si=SFbA5861PqPgdlJI" target="_blank" class="btn-primary" style="display: inline-block; padding: 10px 20px; text-decoration: none;">영상 보기 &#8594;</a>
+                </div>
+            </div>
+
+            <!-- 2. 가격에서 가치로 -->
+            <div class="card" style="display: grid; grid-template-columns: 300px 1fr 250px; gap: 30px; align-items: center;">
+                <div>
+                    <a href="https://youtu.be/T59SSzZW9rY?si=s5FGa57GQnjml1Aj" target="_blank">
+                        <img src="https://i.ytimg.com/vi/T59SSzZW9rY/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/T59SSzZW9rY/0.jpg'" alt="가격에서 가치로" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </div>
+                <div>
+                    <div style="background: linear-gradient(135deg, #3B82F6, #2563EB); color: white; display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">온라인 영상 교육</div>
+                    <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">가격에서 가치로</h3>
+                    <p style="font-size: 14px; color: var(--text-gray); line-height: 1.6; margin-bottom: 15px;">
+                        핵심: 가치 차등을 느끼도록 한다와 병에 이상 치료를 은연 중 가격에 대한 마케팅 내역 통해 입증하려 인식되는 심리 대응 기술을 전수합니다.
+                    </p>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <a href="https://youtu.be/T59SSzZW9rY?si=s5FGa57GQnjml1Aj" target="_blank" style="color: #3B82F6; font-size: 14px; text-decoration: none; font-weight: 600;">https://youtu.be/T59SSzZW9rY</a>
+                        <div style="padding: 8px 12px; border: 2px solid #3B82F6; border-radius: 8px; font-size: 12px; font-weight: 700;">QR 코드</div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 120px; height: 120px; background: white; border: 3px solid #3B82F6; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                        <div style="font-size: 48px;">&#128241;</div>
+                    </div>
+                    <a href="https://youtu.be/T59SSzZW9rY?si=s5FGa57GQnjml1Aj" target="_blank" class="btn-primary" style="display: inline-block; padding: 10px 20px; text-decoration: none; background: #3B82F6;">영상 보기 &#8594;</a>
+                </div>
+            </div>
+
+            <!-- 3. 치과 상담의 재발견 -->
+            <div class="card" style="display: grid; grid-template-columns: 300px 1fr 250px; gap: 30px; align-items: center;">
+                <div>
+                    <a href="https://youtu.be/By0q-TjZh9I?si=UudwEFXe_0df7bLu" target="_blank">
+                        <img src="https://i.ytimg.com/vi/By0q-TjZh9I/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/By0q-TjZh9I/0.jpg'" alt="치과 상담의 재발견" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </div>
+                <div>
+                    <div style="background: linear-gradient(135deg, #FB923C, #EA580C); color: white; display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">온라인 영상 교육</div>
+                    <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">치과 상담의 재발견</h3>
+                    <p style="font-size: 14px; color: var(--text-gray); line-height: 1.6; margin-bottom: 15px;">
+                        핵심: 상담 프로세스에서 내용은 대중을 의인지적인 이유는 온전한 대응에 수익을 끌어낼 가장 실뱀 개선의 원칙을 알려 권장도나 평호 친생합니다.
+                    </p>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <a href="https://youtu.be/By0q-TjZh9I?si=UudwEFXe_0df7bLu" target="_blank" style="color: #FB923C; font-size: 14px; text-decoration: none; font-weight: 600;">https://youtu.be/By0q-TjZh9I</a>
+                        <div style="padding: 8px 12px; border: 2px solid #FB923C; border-radius: 8px; font-size: 12px; font-weight: 700;">QR 코드</div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 120px; height: 120px; background: white; border: 3px solid #FB923C; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                        <div style="font-size: 48px;">&#128241;</div>
+                    </div>
+                    <a href="https://youtu.be/By0q-TjZh9I?si=UudwEFXe_0df7bLu" target="_blank" class="btn-primary" style="display: inline-block; padding: 10px 20px; text-decoration: none; background: #FB923C;">영상 보기 &#8594;</a>
+                </div>
+            </div>
+
+            <!-- 4. 상담 프로세스 -->
+            <div class="card" style="display: grid; grid-template-columns: 300px 1fr 250px; gap: 30px; align-items: center;">
+                <div>
+                    <a href="https://youtu.be/EFKfk54RWQo?si=in2PhalL55_iK_Ok" target="_blank">
+                        <img src="https://i.ytimg.com/vi/EFKfk54RWQo/hqdefault.jpg" onerror="this.src='https://img.youtube.com/vi/EFKfk54RWQo/0.jpg'" alt="상담 프로세스" style="width: 100%; height: 200px; object-fit: cover; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); cursor: pointer; transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    </a>
+                </div>
+                <div>
+                    <div style="background: linear-gradient(135deg, #EC4899, #DB2777); color: white; display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 700; margin-bottom: 12px;">온라인 영상 교육</div>
+                    <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 12px;">상담 프로세스</h3>
+                    <p style="font-size: 14px; color: var(--text-gray); line-height: 1.6; margin-bottom: 15px;">
+                        핵심: 코조거래 법호화 관리 및 광을호는 호사용 이사정공의역과 받망비더니, 타 환자 등급 실속 만족도와 믿을을 만족 사정을 전수합니다.
+                    </p>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <a href="https://youtu.be/EFKfk54RWQo?si=in2PhalL55_iK_Ok" target="_blank" style="color: #EC4899; font-size: 14px; text-decoration: none; font-weight: 600;">https://youtu.be/EFKfk54RWQo</a>
+                        <div style="padding: 8px 12px; border: 2px solid #EC4899; border-radius: 8px; font-size: 12px; font-weight: 700;">QR 코드</div>
+                    </div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="width: 120px; height: 120px; background: white; border: 3px solid #EC4899; border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 15px;">
+                        <div style="font-size: 48px;">&#128241;</div>
+                    </div>
+                    <a href="https://youtu.be/EFKfk54RWQo?si=in2PhalL55_iK_Ok" target="_blank" class="btn-primary" style="display: inline-block; padding: 10px 20px; text-decoration: none; background: #EC4899;">영상 보기 &#8594;</a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Bottom Info -->
+        <div class="card" style="margin-top: 40px; background: linear-gradient(135deg, #F8F9FA 0%, #E9ECEF 100%);">
+            <div style="text-align: center;">
+                <h3 style="font-size: 22px; font-weight: 900; margin-bottom: 15px;">&#128222; 더 많은 교육 자료가 필요하신가요?</h3>
+                <p style="font-size: 15px; color: var(--text-gray); margin-bottom: 20px;">오프라인 교육, 1:1 맞춤 컨설팅 등 다양한 교육 프로그램을 준비하고 있습니다.</p>
+                <button class="btn-primary" style="font-size: 16px; padding: 14px 40px;">문의하기 &#8594;</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="education-materials.html" style="color: #94A3B8; text-decoration: none; display: block;">교육 자료</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

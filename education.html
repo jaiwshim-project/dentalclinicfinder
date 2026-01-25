@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>교육프로그램 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .btn-primary { background: #06D6A0; color: white; padding: 16px 30px; border-radius: 10px; border: none; font-weight: 700; cursor: pointer; font-size: 16px; font-family: 'Noto Sans KR', sans-serif; text-decoration: none; display: inline-block; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link active" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); padding: 50px; border-radius: 16px; margin-bottom: 40px; text-align: center; color: white;">
+            <h2 style="font-size: 36px; font-weight: 900; margin-bottom: 15px;">&#127891; 교육 프로그램</h2>
+            <p style="font-size: 16px; opacity: 0.9;">치과 경영과 환자 소통 능력을 높이는 전문 교육</p>
+        </div>
+
+        <!-- Program Cards -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 25px; margin-bottom: 40px;">
+
+            <!-- Program 1 -->
+            <div class="card" style="border-top: 4px solid #06D6A0;">
+                <div style="font-size: 48px; margin-bottom: 15px;">&#128172;</div>
+                <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 15px; color: #06D6A0;">환자 상담 스킬 마스터</h3>
+                <p style="color: var(--text-gray); line-height: 1.6; margin-bottom: 20px; font-size: 14px;">
+                    QLRCQ 기법을 활용한 효과적인 환자 상담 기술. 환자의 불안을 신뢰로 바꾸는 커뮤니케이션 전략을 배웁니다.
+                </p>
+                <ul style="list-style: none; margin-bottom: 20px; color: var(--text-gray); font-size: 14px;">
+                    <li style="padding: 8px 0; border-bottom: 1px solid #F1F3F5;">&#9989; 8주 과정 (주 1회 2시간)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #F1F3F5;">&#9989; 실습 중심 커리큘럼</li>
+                    <li style="padding: 8px 0;">&#9989; 수료증 발급</li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 24px; font-weight: 900; color: #06D6A0;">120만원</span>
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 14px;">신청하기</button>
+                </div>
+            </div>
+
+            <!-- Program 2 -->
+            <div class="card" style="border-top: 4px solid #3B82F6;">
+                <div style="font-size: 48px; margin-bottom: 15px;">&#128200;</div>
+                <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 15px; color: #3B82F6;">치과 경영 아카데미</h3>
+                <p style="color: var(--text-gray); line-height: 1.6; margin-bottom: 20px; font-size: 14px;">
+                    데이터 기반 치과 경영 전략. 환자 유입부터 재방문율 높이기까지, 실전 경영 노하우를 전수합니다.
+                </p>
+                <ul style="list-style: none; margin-bottom: 20px; color: var(--text-gray); font-size: 14px;">
+                    <li style="padding: 8px 0; border-bottom: 1px solid #F1F3F5;">&#9989; 12주 과정 (주 1회 3시간)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #F1F3F5;">&#9989; 1:1 컨설팅 포함</li>
+                    <li style="padding: 8px 0;">&#9989; 경영 진단 리포트 제공</li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 24px; font-weight: 900; color: #3B82F6;">200만원</span>
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 14px; background: #3B82F6;">신청하기</button>
+                </div>
+            </div>
+
+            <!-- Program 3 -->
+            <div class="card" style="border-top: 4px solid #FB923C;">
+                <div style="font-size: 48px; margin-bottom: 15px;">&#129302;</div>
+                <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 15px; color: #FB923C;">AI톡 활용 워크숍</h3>
+                <p style="color: var(--text-gray); line-height: 1.6; margin-bottom: 20px; font-size: 14px;">
+                    AI 챗봇 시스템을 효과적으로 활용하는 방법. 환자 상담 자동화와 예약 전환율 높이기 실습.
+                </p>
+                <ul style="list-style: none; margin-bottom: 20px; color: var(--text-gray); font-size: 14px;">
+                    <li style="padding: 8px 0; border-bottom: 1px solid #F1F3F5;">&#9989; 1일 집중 과정 (6시간)</li>
+                    <li style="padding: 8px 0; border-bottom: 1px solid #F1F3F5;">&#9989; AI톡 1개월 무료 체험</li>
+                    <li style="padding: 8px 0;">&#9989; 사후 지원 서비스</li>
+                </ul>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span style="font-size: 24px; font-weight: 900; color: #FB923C;">50만원</span>
+                    <button class="btn-primary" style="padding: 12px 24px; font-size: 14px; background: #FB923C;">신청하기</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="card" style="margin-bottom: 40px;">
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 25px; text-align: center;">&#127775; 교육 프로그램 혜택</h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;">
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">&#127942;</div>
+                    <h4 style="font-weight: 700; margin-bottom: 8px;">전문가 강사진</h4>
+                    <p style="color: var(--text-gray); font-size: 14px;">현직 치과 경영 전문가와 상담 코치</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">&#128218;</div>
+                    <h4 style="font-weight: 700; margin-bottom: 8px;">실전 자료 제공</h4>
+                    <p style="color: var(--text-gray); font-size: 14px;">즉시 활용 가능한 템플릿과 가이드</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">&#129309;</div>
+                    <h4 style="font-weight: 700; margin-bottom: 8px;">네트워킹 기회</h4>
+                    <p style="color: var(--text-gray); font-size: 14px;">동료 원장님들과의 교류와 협력</p>
+                </div>
+                <div style="text-align: center; padding: 20px;">
+                    <div style="font-size: 48px; margin-bottom: 15px;">&#128176;</div>
+                    <h4 style="font-weight: 700; margin-bottom: 8px;">프리미엄 할인</h4>
+                    <p style="color: var(--text-gray); font-size: 14px;">프리미엄 회원 30% 할인 적용</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="card" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED); color: white; text-align: center; padding: 40px;">
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 15px;">맞춤 교육이 필요하신가요?</h3>
+            <p style="margin-bottom: 25px; opacity: 0.9;">병원 규모와 상황에 맞는 1:1 맞춤 교육 프로그램을 제공합니다.</p>
+            <button style="background: white; color: #8B5CF6; padding: 14px 40px; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer;">&#128222; 상담 신청하기</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="education.html" style="color: #94A3B8; text-decoration: none; display: block;">교육 프로그램</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

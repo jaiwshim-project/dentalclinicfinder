@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>병원비교 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link active" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%); padding: 50px; border-radius: 16px; margin-bottom: 40px; text-align: center; color: white;">
+            <h2 style="font-size: 36px; font-weight: 900; margin-bottom: 15px;">&#128260; 병원 비교</h2>
+            <p style="font-size: 16px; opacity: 0.9;">최대 3개 병원을 나란히 비교하여 최적의 선택을 도와드립니다</p>
+        </div>
+
+        <!-- Hospital Selection -->
+        <div class="card" style="margin-bottom: 30px;">
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px;">비교할 병원 선택 (최대 3개)</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                    <option value="">병원 1 선택</option>
+                    <option value="서로명명치과병원">1위 - 서로명명치과병원 (97점)</option>
+                    <option value="속초선치과">2위 - 속초선치과 (94점)</option>
+                    <option value="서울24시치과센터">3위 - 서울24시치과센터 (93점)</option>
+                    <option value="우리치과병원">4위 - 우리치과병원 (92점)</option>
+                    <option value="행복치과병원">5위 - 행복치과병원 (92점)</option>
+                    <option value="화이트서울치과">6위 - 화이트서울치과 (90점)</option>
+                </select>
+                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                    <option value="">병원 2 선택</option>
+                    <option value="서로명명치과병원">1위 - 서로명명치과병원 (97점)</option>
+                    <option value="속초선치과">2위 - 속초선치과 (94점)</option>
+                    <option value="서울24시치과센터">3위 - 서울24시치과센터 (93점)</option>
+                    <option value="우리치과병원">4위 - 우리치과병원 (92점)</option>
+                    <option value="행복치과병원">5위 - 행복치과병원 (92점)</option>
+                    <option value="화이트서울치과">6위 - 화이트서울치과 (90점)</option>
+                </select>
+                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                    <option value="">병원 3 선택 (선택사항)</option>
+                    <option value="서로명명치과병원">1위 - 서로명명치과병원 (97점)</option>
+                    <option value="속초선치과">2위 - 속초선치과 (94점)</option>
+                    <option value="서울24시치과센터">3위 - 서울24시치과센터 (93점)</option>
+                    <option value="우리치과병원">4위 - 우리치과병원 (92점)</option>
+                    <option value="행복치과병원">5위 - 행복치과병원 (92점)</option>
+                    <option value="화이트서울치과">6위 - 화이트서울치과 (90점)</option>
+                </select>
+            </div>
+            <div style="text-align: center; margin-top: 20px;">
+                <button onclick="alert('비교 기능 준비중입니다!')" style="background: #8B5CF6; color: white; padding: 12px 40px; border: none; border-radius: 8px; font-weight: 700; cursor: pointer;">비교하기</button>
+            </div>
+        </div>
+
+        <!-- Comparison Table -->
+        <div class="card" style="overflow-x: auto;">
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 20px;">TOP 3 병원 비교표</h3>
+            <table style="width: 100%; border-collapse: collapse; min-width: 800px;">
+                <thead>
+                    <tr style="background: #F8F9FA;">
+                        <th style="padding: 15px; text-align: left; font-weight: 700; border-bottom: 2px solid #E9ECEF; width: 200px;">비교 항목</th>
+                        <th style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
+                            <div style="color: #8B5CF6; font-size: 18px;">&#129351; 1위</div>
+                            <div style="margin-top: 5px;">서로명명치과병원</div>
+                        </th>
+                        <th style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
+                            <div style="color: #8B5CF6; font-size: 18px;">&#129352; 2위</div>
+                            <div style="margin-top: 5px;">속초선치과</div>
+                        </th>
+                        <th style="padding: 15px; text-align: center; font-weight: 700; border-bottom: 2px solid #E9ECEF;">
+                            <div style="color: #8B5CF6; font-size: 18px;">&#129353; 3위</div>
+                            <div style="margin-top: 5px;">서울24시치과센터</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">DF-AI 신뢰 점수</td>
+                        <td style="padding: 15px; text-align: center;"><span style="background: #8B5CF6; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700;">97점</span></td>
+                        <td style="padding: 15px; text-align: center;"><span style="background: #8B5CF6; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700;">94점</span></td>
+                        <td style="padding: 15px; text-align: center;"><span style="background: #8B5CF6; color: white; padding: 6px 16px; border-radius: 20px; font-weight: 700;">93점</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">원장</td>
+                        <td style="padding: 15px; text-align: center;">이준섭</td>
+                        <td style="padding: 15px; text-align: center;">양동봉</td>
+                        <td style="padding: 15px; text-align: center;">김성민</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">전문 분야</td>
+                        <td style="padding: 15px; text-align: center;">임플란트</td>
+                        <td style="padding: 15px; text-align: center;">일반진료</td>
+                        <td style="padding: 15px; text-align: center;">심미치료</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">지역</td>
+                        <td style="padding: 15px; text-align: center;">서울 강남구</td>
+                        <td style="padding: 15px; text-align: center;">강원 속초시</td>
+                        <td style="padding: 15px; text-align: center;">서울 중구</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">AI톡 운영</td>
+                        <td style="padding: 15px; text-align: center;"><span style="color: #EF4444;">&#10060;</span></td>
+                        <td style="padding: 15px; text-align: center;"><span style="color: #06D6A0; font-weight: 700;">&#9989; 운영중</span></td>
+                        <td style="padding: 15px; text-align: center;"><span style="color: #EF4444;">&#10060;</span></td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">신문 기사</td>
+                        <td style="padding: 15px; text-align: center;">1건 (30점)</td>
+                        <td style="padding: 15px; text-align: center;">0건</td>
+                        <td style="padding: 15px; text-align: center;">0건</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">방송 출연</td>
+                        <td style="padding: 15px; text-align: center;">0건</td>
+                        <td style="padding: 15px; text-align: center;">1건 (50점)</td>
+                        <td style="padding: 15px; text-align: center;">1건 (50점)</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">소통 점수</td>
+                        <td style="padding: 15px; text-align: center;">30점</td>
+                        <td style="padding: 15px; text-align: center;"><span style="color: #06D6A0; font-weight: 700;">550점</span></td>
+                        <td style="padding: 15px; text-align: center;">50점</td>
+                    </tr>
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 15px; font-weight: 600;">환자 평가</td>
+                        <td style="padding: 15px; text-align: center;">&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td style="padding: 15px; text-align: center;">&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                        <td style="padding: 15px; text-align: center;">&#11088;&#11088;&#11088;&#11088;&#11088;</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 15px; font-weight: 600;">병원 유형</td>
+                        <td style="padding: 15px; text-align: center;">종합병원</td>
+                        <td style="padding: 15px; text-align: center;">일반치과</td>
+                        <td style="padding: 15px; text-align: center;">24시센터</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- AI Recommendation -->
+        <div class="card" style="background: linear-gradient(135deg, #EFF6FF, #DBEAFE); border: 2px solid #3B82F6; margin-top: 30px;">
+            <h3 style="font-size: 20px; font-weight: 800; margin-bottom: 15px; color: #3B82F6;">&#129302; AI 추천 분석</h3>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">서로명명치과병원</h4>
+                    <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px;">
+                        <strong>추천:</strong> 임플란트 전문<br>
+                        높은 AI 평가 점수와 풍부한 임플란트 경험. 신뢰할 수 있는 종합병원.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">속초선치과</h4>
+                    <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px;">
+                        <strong>추천:</strong> 24시간 소통 중시<br>
+                        AI톡으로 언제든 상담 가능. 소통 점수 1위로 환자 케어 우수.
+                    </p>
+                </div>
+                <div>
+                    <h4 style="font-size: 16px; font-weight: 700; margin-bottom: 10px;">서울24시치과센터</h4>
+                    <p style="line-height: 1.6; color: var(--text-gray); font-size: 14px;">
+                        <strong>추천:</strong> 심미치료 & 응급<br>
+                        24시간 응급 진료 가능. 심미치료 전문으로 미적 케어 필요 시 최적.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Export Button -->
+        <div style="text-align: center; margin-top: 30px;">
+            <button onclick="alert('PDF 다운로드 기능 준비중입니다!')" style="background: #EF4444; color: white; padding: 14px 40px; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer; margin-right: 15px;">&#128229; PDF로 저장</button>
+            <button onclick="alert('인쇄 기능 준비중입니다!')" style="background: white; color: #8B5CF6; padding: 14px 40px; border: 2px solid #8B5CF6; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer;">&#128424; 인쇄하기</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="compare.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 비교</a>
+                        <a href="reviews.html" style="color: #94A3B8; text-decoration: none; display: block;">환자 후기</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

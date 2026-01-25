@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>환자후기 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --primary-green: #06D6A0; --bg-gray: #F8F9FA; --border-gray: #E9ECEF; --text-dark: #212529; --text-gray: #6C757D; }
+        body { font-family: 'Noto Sans KR', sans-serif; background: #F8F9FA; color: var(--text-dark); }
+        header { background: white; border-bottom: 1px solid var(--border-gray); position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 4px rgba(0,0,0,0.04); }
+        .header-container { max-width: 1400px; margin: 0 auto; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; }
+        .logo h1 { font-family: 'Outfit', sans-serif; font-size: 28px; font-weight: 800; color: #06D6A0; }
+        .logo a { text-decoration: none; }
+        .logo-subtitle { font-size: 13px; color: var(--text-gray); }
+        nav { display: flex; gap: 30px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-weight: 500; font-size: 15px; padding: 8px 0; transition: all 0.3s; }
+        nav a:hover { color: #06D6A0; }
+        nav a.active { color: #06D6A0; border-bottom: 3px solid #06D6A0; }
+        .user-section { display: flex; align-items: center; gap: 20px; }
+        .badge { background: linear-gradient(135deg, #FB923C, #EA580C); color: white; padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 700; }
+        .notification { font-size: 24px; cursor: pointer; position: relative; }
+        .user-name { font-weight: 600; font-size: 14px; }
+        .logout { color: var(--text-gray); font-size: 14px; cursor: pointer; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 30px 40px; }
+        .card { background: white; border-radius: 12px; padding: 30px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html"><h1>DentalClinicFinder</h1><div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div></a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link active" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge">&#128142; 프리미엄</span>
+                <div class="notification">&#128276;<span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span></div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Header -->
+        <div style="background: linear-gradient(135deg, #EC4899 0%, #DB2777 100%); padding: 50px; border-radius: 16px; margin-bottom: 40px; text-align: center; color: white;">
+            <h2 style="font-size: 36px; font-weight: 900; margin-bottom: 15px;">&#11088; 환자 후기</h2>
+            <p style="font-size: 16px; opacity: 0.9;">실제 환자분들이 남긴 솔직한 치료 경험을 확인하세요</p>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="card" style="margin-bottom: 30px;">
+            <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                    <option>전체 병원</option>
+                    <option>서로명명치과병원</option>
+                    <option>속초선치과</option>
+                    <option>서울24시치과센터</option>
+                    <option>우리치과병원</option>
+                    <option>행복치과병원</option>
+                    <option>화이트서울치과</option>
+                </select>
+                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                    <option>전체 진료</option>
+                    <option>임플란트</option>
+                    <option>교정치료</option>
+                    <option>심미치료</option>
+                    <option>일반진료</option>
+                </select>
+                <select style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px;">
+                    <option>최신순</option>
+                    <option>별점 높은순</option>
+                    <option>별점 낮은순</option>
+                    <option>도움됨순</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Review Cards -->
+        <div style="display: grid; gap: 20px;">
+            <!-- Review 1 -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div>
+                        <div style="color: #06D6A0; font-weight: 700; font-size: 18px; margin-bottom: 5px;">서로명명치과병원</div>
+                        <div style="color: var(--text-gray); font-size: 14px;">이준섭 원장 | 임플란트</div>
+                    </div>
+                    <div>
+                        <div style="color: #FB923C; font-size: 20px; margin-bottom: 5px;">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                        <div style="color: var(--text-gray); font-size: 13px;">2025.12.28</div>
+                    </div>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">정말 만족스러운 임플란트 시술이었습니다</h3>
+                <p style="line-height: 1.8; color: var(--text-gray); margin-bottom: 20px;">
+                    처음에는 임플란트가 겁이 났는데, 이준섭 원장님께서 너무 친절하게 설명해주셔서 안심하고 받을 수 있었습니다.
+                    시술 과정도 전혀 아프지 않았고, 사후 관리까지 꼼꼼하게 해주셔서 정말 감사했습니다.
+                    지금은 자연 치아처럼 편하게 사용하고 있어요. 주변 지인들에게도 적극 추천하고 있습니다!
+                </p>
+                <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #E9ECEF;">
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128172; 전문적인 상담</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128522; 친절한 응대</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#10024; 깨끗한 시설</span>
+                    <div style="margin-left: auto;">
+                        <button style="background: none; border: 1px solid #E9ECEF; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;">&#128077; 도움됨 (24)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 2 -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div>
+                        <div style="color: #06D6A0; font-weight: 700; font-size: 18px; margin-bottom: 5px;">속초선치과</div>
+                        <div style="color: var(--text-gray); font-size: 14px;">양동봉 원장 | 일반진료</div>
+                    </div>
+                    <div>
+                        <div style="color: #FB923C; font-size: 20px; margin-bottom: 5px;">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                        <div style="color: var(--text-gray); font-size: 13px;">2025.12.25</div>
+                    </div>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">AI톡 덕분에 편하게 예약했어요!</h3>
+                <p style="line-height: 1.8; color: var(--text-gray); margin-bottom: 20px;">
+                    밤늦게 갑자기 이가 아파서 걱정했는데, AI톡으로 24시간 상담이 가능해서 너무 좋았습니다.
+                    즉시 응급 예약을 잡아주셨고, 다음날 아침 바로 치료받을 수 있었어요.
+                    양동봉 원장님도 정말 실력이 좋으시고 꼼꼼하게 봐주셔서 완전 만족합니다.
+                    AI톡 시스템이 있어서 언제든 문의할 수 있다는 게 정말 큰 장점인 것 같아요!
+                </p>
+                <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #E9ECEF;">
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#129302; AI톡 24시간</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#9889; 빠른 응대</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128104;&#8205;&#9877;&#65039; 실력 있는 원장</span>
+                    <div style="margin-left: auto;">
+                        <button style="background: none; border: 1px solid #E9ECEF; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;">&#128077; 도움됨 (18)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 3 -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div>
+                        <div style="color: #06D6A0; font-weight: 700; font-size: 18px; margin-bottom: 5px;">행복치과병원</div>
+                        <div style="color: var(--text-gray); font-size: 14px;">최수진 원장 | 심미치료</div>
+                    </div>
+                    <div>
+                        <div style="color: #FB923C; font-size: 20px; margin-bottom: 5px;">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                        <div style="color: var(--text-gray); font-size: 13px;">2025.12.20</div>
+                    </div>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">라미네이트 시술 너무 자연스럽게 잘 됐어요</h3>
+                <p style="line-height: 1.8; color: var(--text-gray); margin-bottom: 20px;">
+                    앞니가 삐뚤어져서 고민이 많았는데 최수진 원장님께서 라미네이트를 추천해주셨어요.
+                    처음엔 부작용이 걱정됐지만, 상담 때 정말 자세하게 설명해주시고
+                    실제 사례들도 많이 보여주셔서 신뢰가 갔습니다.
+                    결과물도 정말 만족스럽고 주변에서 자연스럽다고 칭찬 많이 받아요!
+                </p>
+                <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #E9ECEF;">
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#127912; 자연스러운 결과</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128172; 상세한 설명</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128105;&#8205;&#9877;&#65039; 여성 원장</span>
+                    <div style="margin-left: auto;">
+                        <button style="background: none; border: 1px solid #E9ECEF; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;">&#128077; 도움됨 (31)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 4 -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div>
+                        <div style="color: #06D6A0; font-weight: 700; font-size: 18px; margin-bottom: 5px;">우리치과병원</div>
+                        <div style="color: var(--text-gray); font-size: 14px;">박지현 원장 | 교정치료</div>
+                    </div>
+                    <div>
+                        <div style="color: #FB923C; font-size: 20px; margin-bottom: 5px;">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                        <div style="color: var(--text-gray); font-size: 13px;">2025.12.15</div>
+                    </div>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">투명 교정, 주변에서 눈치 못 채요!</h3>
+                <p style="line-height: 1.8; color: var(--text-gray); margin-bottom: 20px;">
+                    직장인이라 눈에 띄는 교정은 부담스러웠는데, 박지현 원장님께서 투명 교정을 권해주셨어요.
+                    처음엔 효과가 있을까 의심했지만, 3개월 만에 눈에 띄게 변화가 보여서 깜짝 놀랐습니다.
+                    직장 동료들도 제가 교정하는지 전혀 몰랐대요. 매달 정기 검진 때도 항상 친절하게 대해주셔서 감사합니다!
+                </p>
+                <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #E9ECEF;">
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128269; 눈에 안 띔</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128200; 빠른 효과</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#128188; 직장인 추천</span>
+                    <div style="margin-left: auto;">
+                        <button style="background: none; border: 1px solid #E9ECEF; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;">&#128077; 도움됨 (42)</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Review 5 -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 15px;">
+                    <div>
+                        <div style="color: #06D6A0; font-weight: 700; font-size: 18px; margin-bottom: 5px;">화이트서울치과</div>
+                        <div style="color: var(--text-gray); font-size: 14px;">임영일 원장 | 심미치료</div>
+                    </div>
+                    <div>
+                        <div style="color: #FB923C; font-size: 20px; margin-bottom: 5px;">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                        <div style="color: var(--text-gray); font-size: 13px;">2025.12.10</div>
+                    </div>
+                </div>
+                <h3 style="font-size: 18px; font-weight: 700; margin-bottom: 12px;">치아를 뽑지 않고 살려주셔서 감사해요</h3>
+                <p style="line-height: 1.8; color: var(--text-gray); margin-bottom: 20px;">
+                    다른 치과에서는 이를 뽑아야 한다고 해서 너무 걱정했는데,
+                    임영일 원장님께서 자연치아 보존 치료로 살릴 수 있다고 하셔서 치료받았습니다.
+                    시간은 좀 더 걸렸지만, 제 치아를 지킬 수 있어서 너무 기쁩니다.
+                    원장님의 철학과 실력이 정말 대단하신 것 같아요. 강력 추천합니다!
+                </p>
+                <div style="display: flex; gap: 10px; padding-top: 15px; border-top: 1px solid #E9ECEF;">
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#129463; 자연치아 보존</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#127891; 전문의</span>
+                    <span style="background: #F8F9FA; padding: 6px 12px; border-radius: 12px; font-size: 13px; color: var(--text-gray);">&#10084;&#65039; 환자 중심</span>
+                    <div style="margin-left: auto;">
+                        <button style="background: none; border: 1px solid #E9ECEF; padding: 6px 12px; border-radius: 8px; cursor: pointer; font-size: 13px;">&#128077; 도움됨 (56)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="card" style="background: linear-gradient(135deg, #EC4899, #DB2777); color: white; text-align: center; padding: 40px; margin-top: 30px;">
+            <h3 style="font-size: 24px; font-weight: 800; margin-bottom: 15px;">치료 경험을 공유해주세요!</h3>
+            <p style="margin-bottom: 25px; opacity: 0.9;">여러분의 솔직한 후기가 다른 환자분들에게 큰 도움이 됩니다</p>
+            <button style="background: white; color: #EC4899; padding: 14px 40px; border: none; border-radius: 8px; font-weight: 700; font-size: 16px; cursor: pointer;">&#9997;&#65039; 후기 작성하기</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="compare.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 비교</a>
+                        <a href="reviews.html" style="color: #94A3B8; text-decoration: none; display: block;">환자 후기</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; text-align: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

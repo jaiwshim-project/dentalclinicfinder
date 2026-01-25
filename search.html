@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>병원검색 - DentalClinicFinder</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #06D6A0;
+            --bg-gray: #F8F9FA;
+            --border-gray: #E9ECEF;
+            --text-dark: #212529;
+            --text-gray: #6C757D;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #F8F9FA;
+            color: var(--text-dark);
+        }
+
+        header {
+            background: white;
+            border-bottom: 1px solid var(--border-gray);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #06D6A0;
+            cursor: pointer;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .logo-subtitle {
+            font-size: 13px;
+            color: var(--text-gray);
+        }
+
+        nav {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 15px;
+            cursor: pointer;
+            padding: 8px 0;
+            transition: all 0.3s;
+        }
+
+        nav a:hover {
+            color: #06D6A0;
+        }
+
+        nav a.active {
+            color: #06D6A0;
+            border-bottom: 3px solid #06D6A0;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .badge {
+            background: linear-gradient(135deg, #FB923C, #EA580C);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .notification {
+            font-size: 24px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .user-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .logout {
+            color: var(--text-gray);
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .page {
+            display: block;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+
+        .btn-primary {
+            background: #06D6A0;
+            color: white;
+            padding: 16px 30px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary:hover {
+            background: #05C090;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #06D6A0;
+            padding: 16px 30px;
+            border-radius: 10px;
+            border: 2px solid #06D6A0;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            font-family: 'Noto Sans KR', sans-serif;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-secondary:hover {
+            background: #E8F8F3;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead {
+            background: #F8F9FA;
+        }
+
+        th {
+            padding: 15px 10px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 13px;
+            border-bottom: 2px solid var(--border-gray);
+        }
+
+        td {
+            padding: 18px 10px;
+            text-align: center;
+            border-bottom: 1px solid #F1F3F5;
+            font-size: 13px;
+        }
+
+        .hospital-name {
+            color: #06D6A0;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .hospital-name:hover {
+            text-decoration: underline;
+        }
+
+        tbody tr:hover {
+            background: #F8F9FA;
+        }
+
+        /* Doctor Profile Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            animation: fadeIn 0.3s;
+        }
+
+        .modal.active {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            animation: slideUp 0.3s;
+            position: relative;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #E8F8F3 0%, #D1F2E8 100%);
+            padding: 30px;
+            border-radius: 20px 20px 0 0;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            color: #6C757D;
+        }
+
+        .modal-close:hover {
+            background: #06D6A0;
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .modal-body {
+            padding: 30px;
+        }
+
+        .profile-photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #06D6A0, #05C090);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto 20px;
+            border: 5px solid white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 900;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .profile-title {
+            font-size: 16px;
+            color: var(--text-gray);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-section {
+            margin-bottom: 25px;
+        }
+
+        .profile-section-title {
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: #06D6A0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .profile-info-grid {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 12px;
+            font-size: 14px;
+        }
+
+        .profile-label {
+            color: var(--text-gray);
+            font-weight: 600;
+        }
+
+        .profile-value {
+            color: var(--text-dark);
+        }
+
+        .specialty-tag {
+            display: inline-block;
+            background: #E8F8F3;
+            color: #06D6A0;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .achievement-item {
+            padding: 12px;
+            background: #F8F9FA;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .doctor-link {
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .doctor-link:hover {
+            text-decoration: underline;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Doctor Profile Modal -->
+    <div id="doctorModal" class="modal" onclick="closeDoctorModal(event)">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <div class="modal-header">
+                <div class="modal-close" onclick="closeDoctorModal()">&times;</div>
+                <div class="profile-photo" id="modalPhoto">&#128104;&#8205;&#9877;&#65039;</div>
+                <div class="profile-name" id="modalName">원장명</div>
+                <div class="profile-title" id="modalHospital">병원명</div>
+            </div>
+            <div class="modal-body">
+                <div class="profile-section">
+                    <div class="profile-section-title">&#128203; 기본 정보</div>
+                    <div class="profile-info-grid">
+                        <div class="profile-label">진료과목</div>
+                        <div class="profile-value" id="modalSpecialty">-</div>
+                        <div class="profile-label">지역</div>
+                        <div class="profile-value" id="modalLocation">-</div>
+                        <div class="profile-label">경력</div>
+                        <div class="profile-value" id="modalExperience">-</div>
+                        <div class="profile-label">연락처</div>
+                        <div class="profile-value" id="modalContact">-</div>
+                    </div>
+                </div>
+                <div class="profile-section">
+                    <div class="profile-section-title">&#127919; 전문 분야</div>
+                    <div id="modalSpecialties"></div>
+                </div>
+                <div class="profile-section">
+                    <div class="profile-section-title">&#127891; 학력 & 경력</div>
+                    <div id="modalEducation"></div>
+                </div>
+                <div class="profile-section">
+                    <div class="profile-section-title">&#127942; 주요 성과</div>
+                    <div id="modalAchievements"></div>
+                </div>
+                <div class="profile-section">
+                    <div class="profile-section-title">&#11088; AI 평가 점수</div>
+                    <div id="modalScores"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <h1>DentalClinicFinder</h1>
+                    <div class="logo-subtitle">AI 기반 치과병원 신뢰&소통 평가 플랫폼</div>
+                </a>
+            </div>
+            <nav>
+                <a class="nav-link" href="index.html">홈</a>
+                <a class="nav-link active" href="search.html">병원검색</a>
+                <a class="nav-link" href="compare.html">병원비교</a>
+                <a class="nav-link" href="reviews.html">환자후기</a>
+                <a class="nav-link" href="cost.html">비용안내</a>
+                <a class="nav-link" href="faq.html">FAQ</a>
+                <a class="nav-link" href="blog.html">블로그</a>
+                <a class="nav-link" href="education.html">교육프로그램</a>
+                <a class="nav-link" href="education-materials.html">교육 자료</a>
+                <a class="nav-link" href="media.html">신문·방송</a>
+                <a class="nav-link" href="performance-report.html">성과리포트</a>
+                <a class="nav-link" href="dashboard-basic.html">기본 대시보드</a>
+                <a class="nav-link" href="dashboard-premium.html">프리미엄 대시보드</a>
+            </nav>
+            <div class="user-section">
+                <span class="badge" id="planBadge">&#128142; 프리미엄</span>
+                <div class="notification" onclick="alert('새 알림이 없습니다.')">
+                    &#128276;
+                    <span style="position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #EF4444; border-radius: 50%; border: 2px solid white;"></span>
+                </div>
+                <div class="user-name">양동봉 원장님</div>
+                <a class="logout" onclick="alert('로그아웃 되었습니다.')">로그아웃</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Page -->
+    <div id="search" class="page active">
+        <div class="container">
+            <!-- Page Header -->
+            <div style="background: linear-gradient(135deg, #E8F8F3 0%, #D1F2E8 100%); padding: 40px; border-radius: 16px; margin-bottom: 40px; text-align: center;">
+                <h2 style="font-size: 32px; font-weight: 900; margin-bottom: 15px;">&#128269; 병원 검색</h2>
+                <p style="font-size: 16px; color: var(--text-gray);">AI 기반 신뢰 점수로 최적의 치과를 찾아보세요</p>
+            </div>
+
+            <!-- Advanced Search -->
+            <div class="card" style="margin-bottom: 30px;">
+                <div style="display: flex; gap: 15px; margin-bottom: 20px;">
+                    <input type="text" id="mainSearchInput" placeholder="병원명, 원장명, 지역으로 검색..." style="flex: 1; padding: 15px 20px; border: 2px solid #E9ECEF; border-radius: 12px; font-size: 15px; font-family: 'Noto Sans KR', sans-serif;">
+                    <button onclick="performSearch()" style="background: #06D6A0; color: white; padding: 15px 35px; border-radius: 12px; border: none; font-weight: 700; cursor: pointer; font-size: 15px; font-family: 'Noto Sans KR', sans-serif;">검색</button>
+                </div>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <select id="filterHours" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;">
+                        <option value="">진료시간</option>
+                        <option value="24시">24시간</option>
+                        <option value="야간">야간진료</option>
+                        <option value="주말">주말진료</option>
+                    </select>
+                    <select id="filterType" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;">
+                        <option value="">병원유형</option>
+                        <option value="종합병원">종합병원</option>
+                        <option value="치과병원">치과병원</option>
+                        <option value="치과의원">치과의원</option>
+                    </select>
+                    <select id="filterSpecialty" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;">
+                        <option value="">진료과목</option>
+                        <option value="임플란트">임플란트</option>
+                        <option value="교정치료">교정치료</option>
+                        <option value="심미치료">심미치료</option>
+                        <option value="일반진료">일반진료</option>
+                        <option value="응급치료">응급치료</option>
+                    </select>
+                    <select id="filterRegion" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;">
+                        <option value="">지역</option>
+                        <option value="서울">서울</option>
+                        <option value="경기">경기</option>
+                        <option value="인천">인천</option>
+                        <option value="강원">강원</option>
+                        <option value="대전">대전</option>
+                        <option value="부산">부산</option>
+                    </select>
+                    <select id="filterFeature" style="padding: 12px; border: 2px solid #E9ECEF; border-radius: 8px; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;">
+                        <option value="">특수기능</option>
+                        <option value="AI톡">AI톡 운영</option>
+                        <option value="주차">주차가능</option>
+                        <option value="무통">무통마취</option>
+                    </select>
+                    <button onclick="resetFilters()" style="background: white; color: var(--text-gray); padding: 12px 20px; border: 2px solid #E9ECEF; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 14px; font-family: 'Noto Sans KR', sans-serif;">초기화</button>
+                </div>
+            </div>
+
+            <!-- Search Results -->
+            <div class="card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-size: 20px; font-weight: 800;">검색 결과</h3>
+                    <div style="display: flex; gap: 10px;">
+                        <button style="padding: 8px 16px; background: #06D6A0; color: white; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px;">신뢰점수순</button>
+                        <button style="padding: 8px 16px; background: white; color: var(--text-gray); border: 1px solid #E9ECEF; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px;">리뷰순</button>
+                        <button style="padding: 8px 16px; background: white; color: var(--text-gray); border: 1px solid #E9ECEF; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 13px;">거리순</button>
+                    </div>
+                </div>
+                <table>
+                    <thead>
+                        <tr style="background: #F8F9FA;">
+                            <th style="padding: 15px; width: 60px;">순위</th>
+                            <th style="padding: 15px;">병원명</th>
+                            <th style="padding: 15px;">원장</th>
+                            <th style="padding: 15px; width: 80px;">신뢰점수</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchResultsBody">
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">1</td>
+                            <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;" onclick="window.open('http://whiteseoulclinic.com/', '_blank')">서로명명치과병원</span></td>
+                            <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600; font-size: 15px;" onclick="showDoctorProfile('이준섭')">이준섭</span></td>
+                            <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">97</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">2</td>
+                            <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;">속초선치과</span></td>
+                            <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600; font-size: 15px;" onclick="showDoctorProfile('양동봉')">양동봉</span></td>
+                            <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">94</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">3</td>
+                            <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;">서울 24시 치과센터</span></td>
+                            <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600; font-size: 15px;" onclick="showDoctorProfile('김성민')">김성민</span></td>
+                            <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">93</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">4</td>
+                            <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;">우리치과병원</span></td>
+                            <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: #EC4899; font-weight: 600; font-size: 15px;" onclick="showDoctorProfile('박지현')">박지현</span></td>
+                            <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">92</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">5</td>
+                            <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;">행복치과병원</span></td>
+                            <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: #EC4899; font-weight: 600; font-size: 15px;" onclick="showDoctorProfile('최수진')">최수진</span></td>
+                            <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">91</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #F1F3F5;">
+                            <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">6</td>
+                            <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;" onclick="window.open('http://whiteseoulclinic.com/', '_blank')">화이트서울치과</span></td>
+                            <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: #3B82F6; font-weight: 600; font-size: 15px;" onclick="showDoctorProfile('임영일')">임영일</span></td>
+                            <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">90</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="background: #1E293B; color: white; padding: 60px 40px; margin-top: 60px;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px;">
+                <div>
+                    <div style="font-family: 'Outfit', sans-serif; font-size: 24px; font-weight: 800; color: #06D6A0; margin-bottom: 15px;">DentalClinicFinder</div>
+                    <p style="color: #94A3B8; line-height: 1.8; font-size: 14px;">AI 기반 치과병원 신뢰&소통 평가 플랫폼으로<br>환자와 병원 모두에게 최적의 매칭을 제공합니다.</p>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">서비스</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="search.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 검색</a>
+                        <a href="compare.html" style="color: #94A3B8; text-decoration: none; display: block;">병원 비교</a>
+                        <a href="reviews.html" style="color: #94A3B8; text-decoration: none; display: block;">환자 후기</a>
+                        <a href="cost.html" style="color: #94A3B8; text-decoration: none; display: block;">비용 안내</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">병원용</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="dashboard-basic.html" style="color: #94A3B8; text-decoration: none; display: block;">기본 대시보드</a>
+                        <a href="dashboard-premium.html" style="color: #94A3B8; text-decoration: none; display: block;">프리미엄 대시보드</a>
+                        <a href="education.html" style="color: #94A3B8; text-decoration: none; display: block;">교육 프로그램</a>
+                        <a href="media.html" style="color: #94A3B8; text-decoration: none; display: block;">신문 방송</a>
+                    </div>
+                </div>
+                <div>
+                    <div style="font-weight: 700; margin-bottom: 20px;">고객지원</div>
+                    <div style="color: #94A3B8; font-size: 14px; line-height: 2.2;">
+                        <a href="faq.html" style="color: #94A3B8; text-decoration: none; display: block;">FAQ</a>
+                        <span style="display: block;">이메일: support@dentalclinicfinder.kr</span>
+                        <span style="display: block;">전화: 1588-0000</span>
+                    </div>
+                </div>
+            </div>
+            <div style="border-top: 1px solid #334155; padding-top: 30px; display: flex; justify-content: space-between; align-items: center;">
+                <div style="color: #64748B; font-size: 13px;">&copy; 2025 DentalClinicFinder. All rights reserved.</div>
+                <div style="display: flex; gap: 20px; color: #64748B; font-size: 13px;">
+                    <span style="cursor: pointer;">이용약관</span>
+                    <span style="cursor: pointer;">개인정보처리방침</span>
+                    <span style="cursor: pointer;">사업자정보</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Doctor Profile Data
+        const doctorProfiles = {
+            '이준섭': {
+                name: '이준섭',
+                hospital: '서로명명치과병원',
+                gender: 'male',
+                specialty: '임플란트',
+                location: '서울 강남구',
+                experience: '15년',
+                contact: '02-1234-5678',
+                specialties: ['임플란트', '치주치료', '보철치료', '심미치료'],
+                education: [
+                    '서울대학교 치의학과 졸업',
+                    '연세대학교 치과병원 보철과 전문의',
+                    '대한치과보철학회 정회원',
+                    '대한임플란트학회 인정의'
+                ],
+                achievements: [
+                    '2023 대한치과의사협회 우수 치과 선정',
+                    '임플란트 시술 2,000건 이상',
+                    '환자 만족도 평가 98.5%',
+                    '강남구 모범 치과의원 표창'
+                ],
+                scores: { claude: 892, gpt: 845, grok: 812, total: 97 }
+            },
+            '양동봉': {
+                name: '양동봉',
+                hospital: '속초선치과',
+                gender: 'male',
+                specialty: '일반진료',
+                location: '강원 속초시',
+                experience: '12년',
+                contact: '033-1234-5678',
+                specialties: ['일반진료', '예방치료', '소아치과', '보존치료'],
+                education: [
+                    '조선치과대학교 졸업',
+                    '강릉원주대학교 치과병원 수련',
+                    '대한치과의사협회 정회원',
+                    '소아치과학회 회원'
+                ],
+                achievements: [
+                    '2024 AI톡 우수 활용 병원 대상',
+                    '환자 소통 만족도 1위',
+                    '지역 주민 추천 치과 3년 연속',
+                    '속초시 보건의료 발전 공로상'
+                ],
+                scores: { claude: 662, gpt: 655, grok: 619, total: 94 }
+            },
+            '김성민': {
+                name: '김성민',
+                hospital: '서울 24시 치과센터',
+                gender: 'male',
+                specialty: '응급치료',
+                location: '서울 강남구',
+                experience: '18년',
+                contact: '02-2345-6789',
+                specialties: ['응급치료', '외과', '신경치료', '일반진료'],
+                education: [
+                    '연세대학교 치의학과 졸업',
+                    '세브란스병원 치과 전문의',
+                    '대한구강악안면외과학회 전문의',
+                    '응급구강의학 인정의'
+                ],
+                achievements: [
+                    '24시간 응급 진료 체계 구축',
+                    '응급 치과 시술 5,000건 이상',
+                    '응급 환자 만족도 99.2%',
+                    '서울시 우수 의료기관 인증'
+                ],
+                scores: { claude: 854, gpt: 793, grok: 756, total: 93 }
+            },
+            '박지현': {
+                name: '박지현',
+                hospital: '우리치과병원',
+                gender: 'female',
+                specialty: '교정치료',
+                location: '서울 마포구',
+                experience: '10년',
+                contact: '02-3456-7890',
+                specialties: ['치아교정', '투명교정', '소아교정', '심미교정'],
+                education: [
+                    '이화여자대학교 치의학과 졸업',
+                    '서울대학교 치과병원 교정과 전문의',
+                    '대한치과교정학회 인정의',
+                    '미국 invisalign 공인 인정의'
+                ],
+                achievements: [
+                    '투명교정 우수 시술 치과 선정',
+                    '교정 치료 1,500건 이상',
+                    '청소년 교정 만족도 98%',
+                    '대한치과교정학회 학술상 수상'
+                ],
+                scores: { claude: 853, gpt: 745, grok: 776, total: 92 }
+            },
+            '최수진': {
+                name: '최수진',
+                hospital: '행복치과병원',
+                gender: 'female',
+                specialty: '심미치료',
+                location: '인천 남동구',
+                experience: '13년',
+                contact: '032-4567-8901',
+                specialties: ['심미치료', '라미네이트', '치아미백', '잇몸성형'],
+                education: [
+                    '단국대학교 치의학과 졸업',
+                    '서울아산병원 치과 수련',
+                    '대한심미치과학회 정회원',
+                    '미국 UCLA 심미치과 과정 수료'
+                ],
+                achievements: [
+                    '심미치과 우수 치과 인증',
+                    '라미네이트 시술 2,500건',
+                    '심미 치료 만족도 99.5%',
+                    '인천시 의료서비스 대상'
+                ],
+                scores: { claude: 808, gpt: 801, grok: 758, total: 91 }
+            },
+            '임영일': {
+                name: '임영일',
+                hospital: '화이트서울치과',
+                gender: 'male',
+                specialty: '심미치료',
+                location: '대전 중구',
+                experience: '20년',
+                contact: '042-522-8234',
+                specialties: ['심미치료', '임플란트', '라미네이트', '치아교정'],
+                education: [
+                    '화이트서울치과의원 대표원장',
+                    '서울대학교 치의학과 졸업',
+                    '서울대학교 치과병원 보철과 전문의',
+                    '대한심미치과학회 정회원'
+                ],
+                achievements: [
+                    '대전 중구 우수 심미치과 선정',
+                    '심미 시술 5,000건 이상',
+                    '환자 만족도 99.8%',
+                    '대전 서로로 133 The BMK 컨벤션 2층'
+                ],
+                scores: { claude: 782, gpt: 768, grok: 741, total: 90 }
+            }
+        };
+
+        function showDoctorProfile(doctorName) {
+            const profile = doctorProfiles[doctorName];
+            if (!profile) return;
+
+            document.getElementById('modalPhoto').textContent = profile.gender === 'male' ? '\u{1F468}\u200D\u2695\uFE0F' : '\u{1F469}\u200D\u2695\uFE0F';
+            document.getElementById('modalName').textContent = profile.name;
+            document.getElementById('modalHospital').textContent = profile.hospital;
+            document.getElementById('modalSpecialty').textContent = profile.specialty;
+            document.getElementById('modalLocation').textContent = profile.location;
+            document.getElementById('modalExperience').textContent = profile.experience;
+            document.getElementById('modalContact').textContent = profile.contact;
+
+            document.getElementById('modalSpecialties').innerHTML = profile.specialties.map(s =>
+                `<span class="specialty-tag">${s}</span>`
+            ).join('');
+
+            document.getElementById('modalEducation').innerHTML = profile.education.map(e =>
+                `<div class="achievement-item"><span class="achievement-icon">\u{1F393}</span>${e}</div>`
+            ).join('');
+
+            document.getElementById('modalAchievements').innerHTML = profile.achievements.map(a =>
+                `<div class="achievement-item">${a}</div>`
+            ).join('');
+
+            document.getElementById('modalScores').innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                    <div style="padding: 15px; background: #E8F8F3; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #6C757D; margin-bottom: 5px;">Claude</div>
+                        <div style="font-size: 20px; font-weight: 900; color: #06D6A0;">${profile.scores.claude}</div>
+                    </div>
+                    <div style="padding: 15px; background: #EFF6FF; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #6C757D; margin-bottom: 5px;">GPT</div>
+                        <div style="font-size: 20px; font-weight: 900; color: #3B82F6;">${profile.scores.gpt}</div>
+                    </div>
+                    <div style="padding: 15px; background: #FFF7ED; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #6C757D; margin-bottom: 5px;">Grok</div>
+                        <div style="font-size: 20px; font-weight: 900; color: #FB923C;">${profile.scores.grok}</div>
+                    </div>
+                    <div style="padding: 15px; background: #FDF2F8; border-radius: 8px; text-align: center;">
+                        <div style="font-size: 12px; color: #6C757D; margin-bottom: 5px;">종합점수</div>
+                        <div style="font-size: 20px; font-weight: 900; color: #EC4899;">${profile.scores.total}점</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('doctorModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDoctorModal(event) {
+            if (!event || event.target.id === 'doctorModal') {
+                document.getElementById('doctorModal').classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        const hospitals = [
+            {name: '서로명명치과병원', doctor: '이준섭', location: '서울 강남구', score: 97, type: '종합병원', specialty: '임플란트'},
+            {name: '속초선치과', doctor: '양동봉', location: '강원 속초시', score: 94, type: '치과의원', specialty: '일반진료'},
+            {name: '서울 24시 치과센터', doctor: '김성민', location: '서울 강남구', score: 93, type: '종합병원', specialty: '응급치료'},
+            {name: '우리치과병원', doctor: '박지현', location: '서울 마포구', score: 92, type: '치과병원', specialty: '교정치료'},
+            {name: '행복치과병원', doctor: '최수진', location: '인천 남동구', score: 91, type: '종합병원', specialty: '심미치료'},
+            {name: '화이트서울치과', doctor: '임영일', location: '대전 중구', score: 90, type: '치과의원', specialty: '심미치료'}
+        ];
+
+        function performSearch() {
+            const searchQuery = document.getElementById('mainSearchInput').value.toLowerCase();
+            const filterType = document.getElementById('filterType').value;
+            const filterSpecialty = document.getElementById('filterSpecialty').value;
+            const filterRegion = document.getElementById('filterRegion').value;
+
+            let filtered = hospitals.filter(h => {
+                const matchesSearch = !searchQuery ||
+                    h.name.toLowerCase().includes(searchQuery) ||
+                    h.doctor.toLowerCase().includes(searchQuery) ||
+                    h.location.toLowerCase().includes(searchQuery);
+
+                const matchesType = !filterType || h.type === filterType;
+                const matchesSpecialty = !filterSpecialty || h.specialty === filterSpecialty;
+                const matchesRegion = !filterRegion || h.location.includes(filterRegion);
+
+                return matchesSearch && matchesType && matchesSpecialty && matchesRegion;
+            });
+
+            filtered.sort((a, b) => b.score - a.score);
+            displaySearchResults(filtered);
+        }
+
+        function displaySearchResults(results) {
+            const tbody = document.getElementById('searchResultsBody');
+
+            if (results.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="padding: 60px; text-align: center; color: var(--text-gray); font-size: 16px;">검색 결과가 없습니다</td></tr>';
+                return;
+            }
+
+            let html = '';
+            results.forEach((h, index) => {
+                const doctorColor = (h.doctor === '박지현' || h.doctor === '최수진' || h.doctor === '노미영') ? '#EC4899' : '#3B82F6';
+                const clickAction = doctorProfiles[h.doctor] ? `showDoctorProfile('${h.doctor}')` : `alert('${h.doctor} 원장 프로필')`;
+
+                html += `
+                    <tr style="border-bottom: 1px solid #F1F3F5;">
+                        <td style="padding: 20px; text-align: center; font-weight: 600; font-size: 15px;">${index + 1}</td>
+                        <td style="padding: 20px; text-align: center;"><span style="color: #06D6A0; font-weight: 600; font-size: 15px; cursor: pointer;">${h.name}</span></td>
+                        <td style="padding: 20px; text-align: center;"><span class="doctor-link" style="color: ${doctorColor}; font-weight: 600; font-size: 15px;" onclick="${clickAction}">${h.doctor}</span></td>
+                        <td style="padding: 20px; text-align: center; font-weight: 700; font-size: 16px; color: #06D6A0;">${h.score}</td>
+                    </tr>
+                `;
+            });
+
+            tbody.innerHTML = html;
+        }
+
+        function resetFilters() {
+            document.getElementById('mainSearchInput').value = '';
+            document.getElementById('filterHours').value = '';
+            document.getElementById('filterType').value = '';
+            document.getElementById('filterSpecialty').value = '';
+            document.getElementById('filterRegion').value = '';
+            document.getElementById('filterFeature').value = '';
+            displaySearchResults(hospitals.sort((a, b) => b.score - a.score));
+        }
+    </script>
+</body>
+</html>
